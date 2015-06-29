@@ -169,6 +169,9 @@ namespace Pentax_K_S2_Remote
                 }
             }
 
+            //Debug Window initial not visible
+            splitContainerDebug.Panel2Collapsed = true;
+
             splitContainerDebug.SplitterDistance = Properties.Settings.Default.splitContainerDebugPosition;
             //You have to select the tab with the splitter first. Otherwise it will not work
             tabControl1.SelectedIndex = 1;
@@ -182,6 +185,7 @@ namespace Pentax_K_S2_Remote
                 ks2 = new PtxK_S2.K_S2(Properties.Settings.Default.IPAdressCamera);
 
             tsslMessage.Text = "";
+
 
         }
         #endregion Form functions
@@ -668,6 +672,23 @@ namespace Pentax_K_S2_Remote
                     log.DebugFormat("Expanding {0}", ((Node)(e.Node.Tag)).Text);
                     ((Node)(e.Node.Tag)).Image = Properties.Resources.folder_open;
                 }
+            }
+        }
+
+        private void tsbDebug_Click(object sender, EventArgs e)
+        {
+            if (splitContainerDebug.Panel2Collapsed)
+            {
+                splitContainerDebug.Panel2Collapsed = false;
+                tsbDebug.Image = Properties.Resources.lightningbug_on;
+                tsslMessage.Text = "Debug window visible";
+            }
+            else
+            {
+                splitContainerDebug.Panel2Collapsed = true;
+                tsbDebug.Image = Properties.Resources.lightningbug_off;
+                tsslMessage.Text = "Debug windows hidden";
+
             }
         }
 
