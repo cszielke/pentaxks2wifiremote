@@ -266,16 +266,17 @@ namespace Pentax_K_S2_Remote
             if (ks2.GetImageInfo("latest", ""))
             {
                 tbDebug.Text = ks2.Content;
+                if (cbLiveView.Checked == false)
+                {
+                    pbLiveView.Image = ks2.GetImage(ks2.PhotoInfo.dir, ks2.PhotoInfo.file, "view");
+                }
             }
             else
             {
                 tbDebug.Text = ks2.ErrCode;
             }
 
-            if (cbLiveView.Checked == false)
-            {
-                pbLiveView.Image = ks2.GetImage(ks2.PhotoInfo.dir, ks2.PhotoInfo.file, "view");
-            }
+            
             RestoreCursor();
         }
 
