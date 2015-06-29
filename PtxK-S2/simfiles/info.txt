@@ -1,0 +1,13 @@
+﻿{"errCode": 200,
+ "errMsg": "OK",
+ "captured": true,
+ "dir": "111_2606",
+ "file": "IMGP2235.JPG",
+ "av": "6.3",
+ "sv": "1600",
+ "xv": "0",
+ "tv": "1.640",
+ "orientation": 1,
+ "cameraModel": "PENTAX K-S2",
+ "latlng": "",
+ "datetime": "15:06:26:17:35:18"}

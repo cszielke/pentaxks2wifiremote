@@ -1,0 +1,5 @@
+{"errCode": 200,
+ "errMsg": "OK",
+ "focused": true,
+ "focusCenters": [],
+ "captured": false}
