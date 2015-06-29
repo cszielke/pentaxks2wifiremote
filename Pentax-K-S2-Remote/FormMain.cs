@@ -264,10 +264,18 @@ namespace Pentax_K_S2_Remote
                 tbDebug.Text = ks2.ErrCode;
             }
 
-            Thread.Sleep(1000);
-
             //Get latest image infos
-            if (ks2.GetImageInfo("latest", ""))
+            //Check, if Image is ready
+            int timeout = 20;
+            bool success = true;
+            while ((success = ks2.GetImageInfo("latest", "")) && (!ks2.PhotoInfo.captured) && (timeout > 0))
+            {
+                timeout--;
+                Thread.Sleep(200);
+            }
+
+            //Get latest image and display at liveview picturebox
+            if (success)
             {
                 tbDebug.Text = ks2.Content;
                 if (cbLiveView.Checked == false)
