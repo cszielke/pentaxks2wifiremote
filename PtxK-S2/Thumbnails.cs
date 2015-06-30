@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
+using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 
 namespace PtxK_S2
 {
     public class Thumbnails
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        
         private string ip;
-        //private filelist filelist;
         private List<string> urllist;
 
         private Thread thread = null;
@@ -61,7 +56,6 @@ namespace PtxK_S2
         public Thumbnails(string ip, filelist filelist)
         {
             this.ip = ip;
-            //this.filelist = filelist;
             this.urllist = new List<string>();
 
             this.thumbsReceived = 0;
@@ -76,8 +70,6 @@ namespace PtxK_S2
                 }
             }
             this.thumbsCount = urllist.Count;
-
-            //log.Debug("Thumnailthread created");
         }
 
         // Start work
@@ -95,7 +87,6 @@ namespace PtxK_S2
                 thread = new Thread(new ThreadStart(WorkerThread));
                 thread.Name = "ThumbnailsThread";
                 thread.Start();
-                //log.Debug("Thumnailthread started");
             }
         }
 
@@ -107,7 +98,6 @@ namespace PtxK_S2
             {
                 // signal to stop
                 stopEvent.Set();
-                //log.Debug("Thumnailthread set stop event");
             }
         }
 
@@ -120,7 +110,6 @@ namespace PtxK_S2
                 thread.Join();
 
                 Free();
-                //log.Debug("Thumnailthread wait for stop");
             }
         }
 
@@ -131,7 +120,6 @@ namespace PtxK_S2
             {
                 thread.Abort();
                 WaitForStop();
-                //log.Debug("Thumnailthread stopped");
             }
         }
 
@@ -165,7 +153,6 @@ namespace PtxK_S2
                     Thread.Sleep(10);
 
                     string fn = urllist[n];
-                    log.DebugFormat("Fetching Thumbnail {0} from {1} ({2})",thumbsReceived,thumbsCount, fn);
                     
                     string ext = Path.GetExtension(fn).ToUpper();
                     if (ext == ".JPG")
@@ -174,7 +161,6 @@ namespace PtxK_S2
                         
                         string urlGetFile = "http://{0}/v1/photos/{1}?size={2}";
                         string url = String.Format(urlGetFile, ip, fn, "thumb");
-                        log.DebugFormat("GetURL {0}", url);
 
                         request = (HttpWebRequest)WebRequest.Create(url);
                         request.ConnectionGroupName = GetHashCode().ToString() + fn;
@@ -183,18 +169,14 @@ namespace PtxK_S2
 
                         using (response = request.GetResponse())
                         {
-                            log.Debug("Response");
                             using (stream = response.GetResponseStream())
                             {
-                                log.Debug("Stream");
                                 if (NewFrame != null)
                                 {
                                     Bitmap bmp = new Bitmap(stream);
                                     // notify client
-                                    log.Debug("Notify");
                                     NewFrame(this, new ThumbnailEventArgs(bmp, fn, thumbsReceived, thumbsCount));
                                     // release the image
-                                    log.Debug("Notify end");
                                     bmp.Dispose();
                                     bmp = null;
 
@@ -212,19 +194,18 @@ namespace PtxK_S2
             }
             catch (WebException ex)
             {
-                log.Error("Thumbnail Error: " + ex.Message);
                 // wait for a while before the next try
                 Thread.Sleep(250);
             }
             catch (ApplicationException ex)
             {
-                log.Error("Thumbnail Error: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine("=============: " + ex.Message);
                 // wait for a while before the next try
                 Thread.Sleep(250);
             }
             catch (Exception ex)
             {
-                log.Error("Thumbnail Error: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine("=============: " + ex.Message);
             }
             finally
             {
@@ -246,9 +227,7 @@ namespace PtxK_S2
                     response.Close();
                     response = null;
                 }
-                log.Debug("Thumbnailthread finally");
             }
-            log.Debug("Thumbnailthread end");
         }
     }
 }

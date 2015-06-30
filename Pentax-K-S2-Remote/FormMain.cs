@@ -26,8 +26,8 @@ namespace Pentax_K_S2_Remote
 
         private bool propsset=false;
         private Cursor oldcur;
-        private PtxK_S2.MJPEGSource mjsource;
-        Thumbnails thumbnailtread;
+        private MJPEGSource mjsource;
+        private Thumbnails thumbnailtread;
 
         #region Form functions
         /// <summary>
