@@ -761,17 +761,5 @@ namespace Pentax_K_S2_Remote
             int idx = (sender as CheckedListBox).SelectedIndex;
             log.DebugFormat("AF={0}", idx);
         }
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            if (thumbnailtread != null)
-            {
-                thumbnailtread.SignalToStop();
-                //thumbnailtread.Stop();
-                //thumbnailtread = null;
-            }
-
-        }
-
     }
 }

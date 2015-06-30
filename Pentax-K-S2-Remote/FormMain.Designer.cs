@@ -123,8 +123,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -214,9 +212,7 @@
             this.tsbExit,
             this.tsbOptions,
             this.tsbAbout,
-            this.tsbDebug,
-            this.toolStripSeparator3,
-            this.toolStripButton1});
+            this.tsbDebug});
             this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1335, 25);
@@ -1103,7 +1099,7 @@
             this.tbDebug.Multiline = true;
             this.tbDebug.Name = "tbDebug";
             this.tbDebug.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbDebug.Size = new System.Drawing.Size(317, 330);
+            this.tbDebug.Size = new System.Drawing.Size(316, 330);
             this.tbDebug.TabIndex = 1;
             // 
             // rtbDebug
@@ -1113,7 +1109,7 @@
             this.rtbDebug.Location = new System.Drawing.Point(4, 31);
             this.rtbDebug.Margin = new System.Windows.Forms.Padding(4);
             this.rtbDebug.Name = "rtbDebug";
-            this.rtbDebug.Size = new System.Drawing.Size(317, 191);
+            this.rtbDebug.Size = new System.Drawing.Size(316, 191);
             this.rtbDebug.TabIndex = 6;
             this.rtbDebug.Text = "";
             // 
@@ -1157,21 +1153,6 @@
             // 
             this.saveFileDialog1.DefaultExt = "JPG";
             this.saveFileDialog1.Filter = "JPG-Files|*.jpg|All files|*.*";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // FormMain
             // 
@@ -1319,8 +1300,6 @@
         private System.Windows.Forms.RadioButton rbAfOff;
         private System.Windows.Forms.RadioButton rbAfOn;
         private System.Windows.Forms.RadioButton rbAfAuto;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 
