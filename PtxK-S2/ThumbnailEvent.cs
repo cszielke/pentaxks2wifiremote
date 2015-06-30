@@ -12,16 +12,14 @@ namespace PtxK_S2
     public class ThumbnailEventArgs : EventArgs
     {
         private System.Drawing.Bitmap bmp;
-        private string dir;
         private string filename;
         private int count;
         private int totalCount;
 
 		// Constructor
-		public ThumbnailEventArgs(System.Drawing.Bitmap bmp,string dir, string filename,int count, int totalcount)
+		public ThumbnailEventArgs(System.Drawing.Bitmap bmp, string filename,int count, int totalcount)
 		{
 			this.bmp = bmp;
-            this.dir = dir;
             this.filename = filename;
             this.count = count;
             this.totalCount = totalcount;
@@ -33,11 +31,6 @@ namespace PtxK_S2
 			get { return bmp; }
 		}
 
-        // Bitmap property
-        public string Dir
-        {
-            get { return dir; }
-        }
         // Bitmap property
         public string Filename
         {

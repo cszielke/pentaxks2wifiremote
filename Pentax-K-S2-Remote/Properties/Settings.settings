@@ -17,7 +17,7 @@
     <Setting Name="splitContainerDebugPosition" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">645</Value>
     </Setting>
-    <Setting Name="splitContainerPictureview" Type="System.Int32" Scope="User">
+    <Setting Name="splitContainerPictureviewPosition" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">200</Value>
     </Setting>
     <Setting Name="LastImageSaveDir" Type="System.String" Scope="User">

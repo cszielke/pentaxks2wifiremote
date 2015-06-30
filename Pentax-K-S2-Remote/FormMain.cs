@@ -116,14 +116,6 @@ namespace Pentax_K_S2_Remote
         /// <param name="e"></param>
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings.Default.WindowSize = this.Size;
-            Properties.Settings.Default.WindowLocation = this.Location;
-
-            Properties.Settings.Default.splitContainerDebugPosition = splitContainerDebug.SplitterDistance;
-            Properties.Settings.Default.splitContainerPictureview = splitContainerPictureview.SplitterDistance;
-
-            Properties.Settings.Default.Save();
-            
             //Stopping threads
             if (thumbnailtread != null)
             {
@@ -135,6 +127,15 @@ namespace Pentax_K_S2_Remote
                 mjsource.Stop();
                 mjsource = null;
             }
+
+            Properties.Settings.Default.WindowSize = this.Size;
+            Properties.Settings.Default.WindowLocation = this.Location;
+
+            Properties.Settings.Default.splitContainerDebugPosition = splitContainerDebug.SplitterDistance;
+            Properties.Settings.Default.splitContainerPictureviewPosition = splitContainerPictureview.SplitterDistance;
+
+            Properties.Settings.Default.Save();
+            
 
             log.Debug("Application closing");
         }
@@ -175,7 +176,7 @@ namespace Pentax_K_S2_Remote
             splitContainerDebug.SplitterDistance = Properties.Settings.Default.splitContainerDebugPosition;
             //You have to select the tab with the splitter first. Otherwise it will not work
             tabControl1.SelectedIndex = 1;
-            splitContainerPictureview.SplitterDistance = Properties.Settings.Default.splitContainerPictureview;
+            splitContainerPictureview.SplitterDistance = Properties.Settings.Default.splitContainerPictureviewPosition;
             tabControl1.SelectedIndex = 0;
 
 
@@ -277,12 +278,12 @@ namespace Pentax_K_S2_Remote
 
                 //Get latest image infos
                 //Check, if Image is ready
-                int timeout = 20;
+                int timeout = 30;
                 bool success = true;
-                while ((success = ks2.GetImageInfo("latest", "")) && (!ks2.PhotoInfo.captured) && (timeout > 0))
+                while ((timeout > 0) && (success = ks2.GetImageInfo("latest", "")) && (!ks2.PhotoInfo.captured))
                 {
                     timeout--;
-                    Thread.Sleep(200);
+                    Thread.Sleep(250);
                 }
 
                 //Get latest image and display at liveview picturebox
@@ -548,7 +549,7 @@ namespace Pentax_K_S2_Remote
         private void SetThumbnail(ThumbnailEventArgs tnea)
         {
             //Get Node from dir and filename
-            Node n = GetNode(tnea.Dir,tnea.Filename);
+            Node n = GetNode(tnea.Filename);
             if(n != null)
             {
                 tspbThumbnailsLoad.Minimum = 0;
@@ -565,19 +566,22 @@ namespace Pentax_K_S2_Remote
             }
         }
 
-        private Node GetNode(string dir, string filename)
+        private Node GetNode(string filename)
         {
             Node n = null;
             TreeModel tm = (TreeModel)tvaFiles.Model;
+            
+            string[] filepath = filename.Split(new char[]{'/','\\'});
+            if (filepath.Length < 2) return n;
 
             //log.DebugFormat("GetNode {0}/{1}",dir,filename);
             foreach (Node dn in tm.Nodes)
             {
-                if (dn.Text == dir)
+                if (dn.Text == filepath[0])
                 {
                     foreach (Node fn in dn.Nodes)
                     {
-                        if (fn.Text == filename)
+                        if (fn.Text == filepath[1])
                         {
                             n = fn;
                             //log.DebugFormat("Found Node {0}/{1}", dir, filename);
@@ -756,6 +760,17 @@ namespace Pentax_K_S2_Remote
         {
             int idx = (sender as CheckedListBox).SelectedIndex;
             log.DebugFormat("AF={0}", idx);
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            if (thumbnailtread != null)
+            {
+                thumbnailtread.SignalToStop();
+                //thumbnailtread.Stop();
+                //thumbnailtread = null;
+            }
+
         }
 
     }

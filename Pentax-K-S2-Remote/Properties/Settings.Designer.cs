@@ -86,12 +86,12 @@ namespace Pentax_K_S2_Remote.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("200")]
-        public int splitContainerPictureview {
+        public int splitContainerPictureviewPosition {
             get {
-                return ((int)(this["splitContainerPictureview"]));
+                return ((int)(this["splitContainerPictureviewPosition"]));
             }
             set {
-                this["splitContainerPictureview"] = value;
+                this["splitContainerPictureviewPosition"] = value;
             }
         }
         

@@ -14,7 +14,8 @@ namespace PtxK_S2
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
         private string ip;
-        private filelist filelist;
+        //private filelist filelist;
+        private List<string> urllist;
 
         private Thread thread = null;
         private ManualResetEvent stopEvent = null;
@@ -60,7 +61,8 @@ namespace PtxK_S2
         public Thumbnails(string ip, filelist filelist)
         {
             this.ip = ip;
-            this.filelist = filelist;
+            //this.filelist = filelist;
+            this.urllist = new List<string>();
 
             this.thumbsReceived = 0;
             this.thumbsCount = 0;
@@ -70,9 +72,10 @@ namespace PtxK_S2
             {
                 foreach (string s in d.files)
                 {
-                    this.thumbsCount++;
+                    urllist.Add(d.name + "/" + s);
                 }
             }
+            this.thumbsCount = urllist.Count;
 
             //log.Debug("Thumnailthread created");
         }
@@ -147,46 +150,63 @@ namespace PtxK_S2
         // Thread entry point
         public void WorkerThread()
         {
-            K_S2 ks2 = new K_S2(ip);
-
+            //K_S2 ks2 = new K_S2(ip);
+            HttpWebRequest request = null;
+            WebResponse response = null;
+            Stream stream = null;
             // reset reload event
             reloadEvent.Reset();
-
             try
             {
-                bool abort = false;
-
                 // loop
-                foreach (dirs d in filelist.dirs)
-                {
-                    foreach (string fn in d.files)
-                    {
-                        //log.DebugFormat("Fetching Thumbnail {0} from {1} ({2}/{3}",thumbsReceived,thumbsCount, d,fn);
-                        string ext = Path.GetExtension(fn).ToUpper();
-                        if (ext == ".JPG")
-                        {
-                            Bitmap bmp = (Bitmap)ks2.GetImage(d.name, fn, "thumb");
-                            // notify client
-                            NewFrame(this, new ThumbnailEventArgs(bmp, d.name, fn, thumbsReceived, thumbsCount));
-                            // release the image
-                            bmp.Dispose();
-                            bmp = null;
-                        }
+                int n = 0;
+                while( (n < urllist.Count) && (!stopEvent.WaitOne(0, true)) && (!reloadEvent.WaitOne(0, true)))
+				{
+                    Thread.Sleep(10);
 
-                        this.thumbsReceived++;
+                    string fn = urllist[n];
+                    log.DebugFormat("Fetching Thumbnail {0} from {1} ({2})",thumbsReceived,thumbsCount, fn);
+                    
+                    string ext = Path.GetExtension(fn).ToUpper();
+                    if (ext == ".JPG")
+                    {
+                        //Bitmap bmp = (Bitmap)ks2.GetImage(d.name, fn, "thumb");
                         
-                        if( (stopEvent.WaitOne(0, true)) || (reloadEvent.WaitOne(0, true)) || (abort) ) //files
+                        string urlGetFile = "http://{0}/v1/photos/{1}?size={2}";
+                        string url = String.Format(urlGetFile, ip, fn, "thumb");
+                        log.DebugFormat("GetURL {0}", url);
+
+                        request = (HttpWebRequest)WebRequest.Create(url);
+                        request.ConnectionGroupName = GetHashCode().ToString() + fn;
+
+                        request.Timeout = 3000;
+
+                        using (response = request.GetResponse())
                         {
-                            abort = true;
-                            break;
-                            
+                            log.Debug("Response");
+                            using (stream = response.GetResponseStream())
+                            {
+                                log.Debug("Stream");
+                                if (NewFrame != null)
+                                {
+                                    Bitmap bmp = new Bitmap(stream);
+                                    // notify client
+                                    log.Debug("Notify");
+                                    NewFrame(this, new ThumbnailEventArgs(bmp, fn, thumbsReceived, thumbsCount));
+                                    // release the image
+                                    log.Debug("Notify end");
+                                    bmp.Dispose();
+                                    bmp = null;
+
+                                }
+                            }
                         }
+                        request.Abort();
+                        request = null;
                     }
 
-                    if (abort) //dirs
-                    {
-                        break;
-                    }
+                    this.thumbsReceived++;
+                    n++;
                 }
 
             }
@@ -208,10 +228,27 @@ namespace PtxK_S2
             }
             finally
             {
-                //log.Debug("Thumbnailthread finally");
+                // abort request
+                if (request != null)
+                {
+                    request.Abort();
+                    request = null;
+                }
+                // close response stream
+                if (stream != null)
+                {
+                    stream.Close();
+                    stream = null;
+                }
+                // close response
+                if (response != null)
+                {
+                    response.Close();
+                    response = null;
+                }
+                log.Debug("Thumbnailthread finally");
             }
-
-            //log.Debug("Thumbnailthread end");
+            log.Debug("Thumbnailthread end");
         }
     }
 }

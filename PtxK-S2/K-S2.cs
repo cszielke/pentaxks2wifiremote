@@ -425,8 +425,8 @@ namespace PtxK_S2
         private void SetParameterIfNotNull(parameter param)
         {
             //returncodes
-            if (param.errCode != null) Parameter.errCode = param.errCode;
-            if (param.errMsg != null) Parameter.errMsg = param.errMsg;
+            Parameter.errCode = param.errCode;
+            Parameter.errMsg = param.errMsg;
 
             //Lists of possible parameters
             if (param.avList != null) Parameter.avList = param.avList;
