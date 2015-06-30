@@ -154,6 +154,7 @@ namespace PtxK_S2
 
             try
             {
+                bool abort = false;
 
                 // loop
                 foreach (dirs d in filelist.dirs)
@@ -171,11 +172,20 @@ namespace PtxK_S2
                             bmp.Dispose();
                             bmp = null;
                         }
+
                         this.thumbsReceived++;
-                        if( (stopEvent.WaitOne(0, true)) || (reloadEvent.WaitOne(0, true)) )
+                        
+                        if( (stopEvent.WaitOne(0, true)) || (reloadEvent.WaitOne(0, true)) || (abort) ) //files
                         {
+                            abort = true;
                             break;
+                            
                         }
+                    }
+
+                    if (abort) //dirs
+                    {
+                        break;
                     }
                 }
 

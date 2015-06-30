@@ -115,6 +115,51 @@
        cx="22.5"
        cy="28.115999"
        r="14.538" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2257"
+       id="radialGradient3030"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.3656,0,0,2.2028,-30.725,-34.24)"
+       cx="22.5"
+       cy="28.116"
+       r="14.538" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3843"
+       id="linearGradient3032"
+       gradientUnits="userSpaceOnUse"
+       x1="21.702"
+       y1="8.9115"
+       x2="21.816"
+       y2="35.546" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#radialGradient2228"
+       id="radialGradient3034"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1,0,0,0.53672,0,16.873)"
+       cx="24.837"
+       cy="36.421"
+       r="15.645" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3788"
+       id="radialGradient3036"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.3656,0,0,2.2028,-30.725,-34.24)"
+       cx="22.5"
+       cy="28.115999"
+       r="14.538" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#radialGradient1368"
+       id="radialGradient3038"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(3.6588,0,0,2.0808,-62.416,12.762)"
+       cx="21.929"
+       cy="-3.2183"
+       r="13" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -232,56 +277,61 @@
      id="layer1"
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
-    <path
-       id="path3835"
-       sodipodi:rx="14"
-       sodipodi:ry="13"
-       style="opacity:.15;stroke-linejoin:round;fill-rule:evenodd;color:#000000;stroke:url(#linearGradient3843);stroke-linecap:square;stroke-width:3.1366;fill:url(#radialGradient2263)"
-       sodipodi:type="arc"
-       d="m36.5 22a14 13 0 1 1 -28 0 14 13 0 1 1 28 0z"
-       transform="matrix(.92070 0 0 .99358 3.6795 1.6412)"
-       sodipodi:cy="22"
-       sodipodi:cx="22.5"
-       inkscape:r_cy="true"
-       inkscape:r_cx="true" />
-    <path
-       id="path2226"
-       sodipodi:rx="15.644737"
-       sodipodi:ry="8.3968935"
-       style="opacity:0.04;fill-rule:evenodd;color:#000000;fill:url(#radialGradient2228)"
-       sodipodi:type="arc"
-       d="m40.482 36.421a15.645 8.3969 0 1 1 -31.29 0 15.645 8.3969 0 1 1 31.29 0z"
-       inkscape:export-ydpi="90"
-       inkscape:export-filename="/home/lapo/Desktop/Grafica/Icone/media-actions.png"
-       sodipodi:cy="36.421127"
-       transform="matrix(1.1505 0 0 .56568 -4.5765 16.553)"
-       inkscape:export-xdpi="90"
-       sodipodi:cx="24.837126" />
-    <path
-       id="path2525"
-       sodipodi:rx="14"
-       sodipodi:ry="13"
-       style="stroke-linejoin:round;fill-rule:evenodd;color:#000000;stroke:#00cc0e;stroke-linecap:square;stroke-width:1.07570000000000010;fill:url(#radialGradient3794);fill-opacity:1;stroke-opacity:1"
-       sodipodi:type="arc"
-       d="m36.5 22a14 13 0 1 1 -28 0 14 13 0 1 1 28 0z"
-       transform="matrix(.89486 0 0 .9657 3.8558 2.6603)"
-       sodipodi:cy="22"
-       sodipodi:cx="22.5" />
-    <path
-       id="path2527"
-       sodipodi:rx="14"
-       sodipodi:ry="14"
-       style="stroke-linejoin:round;color:#000000;stroke:#7df786;stroke-linecap:square;stroke-width:1.21740000000000000;fill:none;stroke-opacity:1"
-       sodipodi:type="arc"
-       d="m38 24a14 14 0 1 1 -28 0 14 14 0 1 1 28 0z"
-       transform="matrix(.82143 0 0 .82143 4.2851 4.1915)"
-       sodipodi:cy="24"
-       sodipodi:cx="24" />
-    <path
-       id="path2529"
-       sodipodi:nodetypes="cccsc"
-       style="opacity:.6;fill-rule:evenodd;fill:url(#radialGradient1368)"
-       d="m23.843 11.906c-6.279 0.079-11.404 4.992-11.812 11.187 6.117 2.517 13.87-1.451 23.142-3.382-0.689-2.748-4.555-7.805-11.174-7.805-0.051 0-0.104-0.001-0.156 0z" />
+    <g
+       id="g3023"
+       transform="matrix(1.3153119,0,0,1.3153119,-7.6739678,-7.3797221)">
+      <path
+         inkscape:r_cx="true"
+         inkscape:r_cy="true"
+         sodipodi:cx="22.5"
+         sodipodi:cy="22"
+         transform="matrix(0.9207,0,0,0.99358,3.6795,1.6412)"
+         d="m 36.5,22 c 0,7.179702 -6.268014,13 -14,13 -7.731986,0 -14,-5.820298 -14,-13 0,-7.179702 6.268014,-13 14,-13 7.731986,0 14,5.820298 14,13 z"
+         sodipodi:type="arc"
+         style="opacity:0.15;color:#000000;fill:url(#radialGradient3030);fill-rule:evenodd;stroke:url(#linearGradient3032);stroke-width:3.13660002;stroke-linecap:square;stroke-linejoin:round"
+         sodipodi:ry="13"
+         sodipodi:rx="14"
+         id="path3835" />
+      <path
+         sodipodi:cx="24.837126"
+         inkscape:export-xdpi="90"
+         transform="matrix(1.1505,0,0,0.56568,-4.5765,16.553)"
+         sodipodi:cy="36.421127"
+         inkscape:export-filename="/home/lapo/Desktop/Grafica/Icone/media-actions.png"
+         inkscape:export-ydpi="90"
+         d="m 40.481863,36.421127 c 0,4.637477 -7.004387,8.396894 -15.644737,8.396894 -8.64035,0 -15.6447375,-3.759417 -15.6447375,-8.396894 0,-4.637476 7.0043875,-8.396893 15.6447375,-8.396893 8.64035,0 15.644737,3.759417 15.644737,8.396893 z"
+         sodipodi:type="arc"
+         style="opacity:0.03999999;color:#000000;fill:url(#radialGradient3034);fill-rule:evenodd"
+         sodipodi:ry="8.3968935"
+         sodipodi:rx="15.644737"
+         id="path2226" />
+      <path
+         sodipodi:cx="22.5"
+         sodipodi:cy="22"
+         transform="matrix(0.89486,0,0,0.9657,3.8558,2.6603)"
+         d="m 36.5,22 c 0,7.179702 -6.268014,13 -14,13 -7.731986,0 -14,-5.820298 -14,-13 0,-7.179702 6.268014,-13 14,-13 7.731986,0 14,5.820298 14,13 z"
+         sodipodi:type="arc"
+         style="color:#000000;fill:url(#radialGradient3036);fill-opacity:1;fill-rule:evenodd;stroke:#00cc0e;stroke-width:1.07570004;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+         sodipodi:ry="13"
+         sodipodi:rx="14"
+         id="path2525" />
+      <path
+         sodipodi:cx="24"
+         sodipodi:cy="24"
+         transform="matrix(0.82143,0,0,0.82143,4.2851,4.1915)"
+         d="m 38,24 c 0,7.731986 -6.268014,14 -14,14 -7.731986,0 -14,-6.268014 -14,-14 0,-7.731986 6.268014,-14 14,-14 7.731986,0 14,6.268014 14,14 z"
+         sodipodi:type="arc"
+         style="color:#000000;fill:none;stroke:#7df786;stroke-width:1.21739995;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
+         sodipodi:ry="14"
+         sodipodi:rx="14"
+         id="path2527" />
+      <path
+         d="m 23.843,11.906 c -6.279,0.079 -11.404,4.992 -11.812,11.187 6.117,2.517 13.87,-1.451 23.142,-3.382 -0.689,-2.748 -4.555,-7.805 -11.174,-7.805 -0.051,0 -0.104,-0.001 -0.156,0 z"
+         style="opacity:0.6;fill:url(#radialGradient3038);fill-rule:evenodd"
+         sodipodi:nodetypes="cccsc"
+         id="path2529"
+         inkscape:connector-curvature="0" />
+    </g>
   </g>
   <metadata
      id="metadata43">
@@ -298,9 +348,11 @@
             <dc:title>Openclipart</dc:title>
           </cc:Agent>
         </dc:publisher>
-        <dc:title></dc:title>
+        <dc:title />
         <dc:date>2010-03-10T21:04:47</dc:date>
-        <dc:description>Record icon from &lt;A href=&quot;http://tango.freedesktop.org/Tango_Desktop_Project&quot;&gt; Tango Project &lt;/A&gt; \n&lt;BR&gt;&lt;BR&gt;\nSince version 0.8.90 Tango Project icons are Public Domain: &lt;A href=&quot;http://tango.freedesktop.org/Frequently_Asked_Questions#Terms_of_Use.3F&quot;&gt; Tango Project FAQ &lt;/A&gt;</dc:description>
+        <dc:description>Record icon from &lt;A href=&quot;http://tango.freedesktop.org/Tango_Desktop_Project&quot;&gt; Tango Project &lt;/A&gt; 
+\n&lt;BR&gt;&lt;BR&gt;
+\nSince version 0.8.90 Tango Project icons are Public Domain: &lt;A href=&quot;http://tango.freedesktop.org/Frequently_Asked_Questions#Terms_of_Use.3F&quot;&gt; Tango Project FAQ &lt;/A&gt;</dc:description>
         <dc:source>https://openclipart.org/detail/30955/tango-media-record-by-warszawianka</dc:source>
         <dc:creator>
           <cc:Agent>

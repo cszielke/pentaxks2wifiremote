@@ -51,39 +51,41 @@
             this.tspbImageDownload = new System.Windows.Forms.ToolStripProgressBar();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpCamera = new System.Windows.Forms.TabPage();
+            this.gbProps2 = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.lModel = new System.Windows.Forms.Label();
+            this.lLiveState = new System.Windows.Forms.Label();
+            this.lFirmware = new System.Windows.Forms.Label();
+            this.lChannel = new System.Windows.Forms.Label();
+            this.lMACAddr = new System.Windows.Forms.Label();
+            this.lKey = new System.Windows.Forms.Label();
+            this.lSN = new System.Windows.Forms.Label();
+            this.lSSID = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.gbProps1 = new System.Windows.Forms.GroupBox();
+            this.cbWB = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cbShootMode = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cbExposureMode = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbStillSize = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbMovieSize = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cbEffect = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cbFilter = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.cbLiveView = new System.Windows.Forms.CheckBox();
             this.pbLiveView = new System.Windows.Forms.PictureBox();
             this.btnGreen = new System.Windows.Forms.Button();
-            this.lLiveState = new System.Windows.Forms.Label();
-            this.lChannel = new System.Windows.Forms.Label();
-            this.lKey = new System.Windows.Forms.Label();
-            this.lSSID = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.lSN = new System.Windows.Forms.Label();
-            this.lMACAddr = new System.Windows.Forms.Label();
-            this.lFirmware = new System.Windows.Forms.Label();
-            this.lModel = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.cbFilter = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cbEffect = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.cbMovieSize = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cbStillSize = new System.Windows.Forms.ComboBox();
-            this.cbExposureMode = new System.Windows.Forms.ComboBox();
-            this.cbShootMode = new System.Windows.Forms.ComboBox();
-            this.cbWB = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -92,7 +94,7 @@
             this.cbSv = new System.Windows.Forms.ComboBox();
             this.cbTv = new System.Windows.Forms.ComboBox();
             this.cbAv = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGetParameter = new System.Windows.Forms.Button();
             this.btnShoot = new System.Windows.Forms.Button();
             this.tpPhotos = new System.Windows.Forms.TabPage();
             this.splitContainerPictureview = new System.Windows.Forms.SplitContainer();
@@ -122,6 +124,8 @@
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpCamera.SuspendLayout();
+            this.gbProps2.SuspendLayout();
+            this.gbProps1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLiveView)).BeginInit();
             this.tpPhotos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerPictureview)).BeginInit();
@@ -144,8 +148,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1163, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(872, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -154,14 +157,14 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Image = global::Pentax_K_S2_Remote.Properties.Resources.Exit;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(102, 24);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.ToolTipText = "Exit Program";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
@@ -171,14 +174,14 @@
             this.extrasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiOptions});
             this.extrasToolStripMenuItem.Name = "extrasToolStripMenuItem";
-            this.extrasToolStripMenuItem.Size = new System.Drawing.Size(60, 24);
+            this.extrasToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.extrasToolStripMenuItem.Text = "&Extras";
             // 
             // tsmiOptions
             // 
             this.tsmiOptions.Image = global::Pentax_K_S2_Remote.Properties.Resources.preferencex_system;
             this.tsmiOptions.Name = "tsmiOptions";
-            this.tsmiOptions.Size = new System.Drawing.Size(130, 24);
+            this.tsmiOptions.Size = new System.Drawing.Size(116, 22);
             this.tsmiOptions.Text = "&Options";
             this.tsmiOptions.Click += new System.EventHandler(this.tsmiOptions_Click);
             // 
@@ -187,13 +190,13 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(119, 24);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -204,9 +207,9 @@
             this.tsbOptions,
             this.tsbAbout,
             this.tsbDebug});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1163, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(872, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -260,24 +263,23 @@
             this.tspbThumbnailsLoad,
             this.toolStripStatusLabel4,
             this.tspbImageDownload});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 527);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 511);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1163, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(872, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 21);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             this.toolStripStatusLabel1.Tag = "                   ";
             // 
             // tsslMessage
             // 
             this.tsslMessage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsslMessage.Name = "tsslMessage";
-            this.tsslMessage.Size = new System.Drawing.Size(621, 21);
+            this.tsslMessage.Size = new System.Drawing.Size(451, 17);
             this.tsslMessage.Spring = true;
             this.tsslMessage.Tag = "";
             this.tsslMessage.Text = "tsslMessage";
@@ -287,26 +289,26 @@
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(125, 21);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(102, 17);
             this.toolStripStatusLabel3.Text = "Load Thumbnails:";
             // 
             // tspbThumbnailsLoad
             // 
             this.tspbThumbnailsLoad.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tspbThumbnailsLoad.Name = "tspbThumbnailsLoad";
-            this.tspbThumbnailsLoad.Size = new System.Drawing.Size(133, 20);
+            this.tspbThumbnailsLoad.Size = new System.Drawing.Size(100, 16);
             // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(127, 21);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(100, 17);
             this.toolStripStatusLabel4.Text = "Download Image:";
             // 
             // tspbImageDownload
             // 
             this.tspbImageDownload.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tspbImageDownload.Name = "tspbImageDownload";
-            this.tspbImageDownload.Size = new System.Drawing.Size(133, 20);
+            this.tspbImageDownload.Size = new System.Drawing.Size(100, 16);
             // 
             // tabControl1
             // 
@@ -315,48 +317,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tpCamera);
             this.tabControl1.Controls.Add(this.tpPhotos);
-            this.tabControl1.Location = new System.Drawing.Point(4, 4);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(846, 451);
+            this.tabControl1.Size = new System.Drawing.Size(633, 450);
             this.tabControl1.TabIndex = 3;
             // 
             // tpCamera
             // 
+            this.tpCamera.Controls.Add(this.gbProps2);
+            this.tpCamera.Controls.Add(this.gbProps1);
             this.tpCamera.Controls.Add(this.cbLiveView);
             this.tpCamera.Controls.Add(this.pbLiveView);
             this.tpCamera.Controls.Add(this.btnGreen);
-            this.tpCamera.Controls.Add(this.lLiveState);
-            this.tpCamera.Controls.Add(this.lChannel);
-            this.tpCamera.Controls.Add(this.lKey);
-            this.tpCamera.Controls.Add(this.lSSID);
-            this.tpCamera.Controls.Add(this.label21);
-            this.tpCamera.Controls.Add(this.label22);
-            this.tpCamera.Controls.Add(this.label23);
-            this.tpCamera.Controls.Add(this.label24);
-            this.tpCamera.Controls.Add(this.lSN);
-            this.tpCamera.Controls.Add(this.lMACAddr);
-            this.tpCamera.Controls.Add(this.lFirmware);
-            this.tpCamera.Controls.Add(this.lModel);
-            this.tpCamera.Controls.Add(this.label16);
-            this.tpCamera.Controls.Add(this.label15);
-            this.tpCamera.Controls.Add(this.label14);
-            this.tpCamera.Controls.Add(this.label13);
-            this.tpCamera.Controls.Add(this.label12);
-            this.tpCamera.Controls.Add(this.cbFilter);
-            this.tpCamera.Controls.Add(this.label11);
-            this.tpCamera.Controls.Add(this.cbEffect);
-            this.tpCamera.Controls.Add(this.label10);
-            this.tpCamera.Controls.Add(this.cbMovieSize);
-            this.tpCamera.Controls.Add(this.label6);
-            this.tpCamera.Controls.Add(this.label7);
-            this.tpCamera.Controls.Add(this.label8);
-            this.tpCamera.Controls.Add(this.label9);
-            this.tpCamera.Controls.Add(this.cbStillSize);
-            this.tpCamera.Controls.Add(this.cbExposureMode);
-            this.tpCamera.Controls.Add(this.cbShootMode);
-            this.tpCamera.Controls.Add(this.cbWB);
             this.tpCamera.Controls.Add(this.label5);
             this.tpCamera.Controls.Add(this.label4);
             this.tpCamera.Controls.Add(this.label3);
@@ -365,24 +338,341 @@
             this.tpCamera.Controls.Add(this.cbSv);
             this.tpCamera.Controls.Add(this.cbTv);
             this.tpCamera.Controls.Add(this.cbAv);
-            this.tpCamera.Controls.Add(this.button1);
+            this.tpCamera.Controls.Add(this.btnGetParameter);
             this.tpCamera.Controls.Add(this.btnShoot);
-            this.tpCamera.Location = new System.Drawing.Point(4, 25);
-            this.tpCamera.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpCamera.Location = new System.Drawing.Point(4, 22);
             this.tpCamera.Name = "tpCamera";
-            this.tpCamera.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tpCamera.Size = new System.Drawing.Size(838, 422);
+            this.tpCamera.Padding = new System.Windows.Forms.Padding(3);
+            this.tpCamera.Size = new System.Drawing.Size(625, 424);
             this.tpCamera.TabIndex = 0;
             this.tpCamera.Text = "Camera";
             this.tpCamera.UseVisualStyleBackColor = true;
             // 
+            // gbProps2
+            // 
+            this.gbProps2.Controls.Add(this.label13);
+            this.gbProps2.Controls.Add(this.label14);
+            this.gbProps2.Controls.Add(this.label15);
+            this.gbProps2.Controls.Add(this.label16);
+            this.gbProps2.Controls.Add(this.lModel);
+            this.gbProps2.Controls.Add(this.lLiveState);
+            this.gbProps2.Controls.Add(this.lFirmware);
+            this.gbProps2.Controls.Add(this.lChannel);
+            this.gbProps2.Controls.Add(this.lMACAddr);
+            this.gbProps2.Controls.Add(this.lKey);
+            this.gbProps2.Controls.Add(this.lSN);
+            this.gbProps2.Controls.Add(this.lSSID);
+            this.gbProps2.Controls.Add(this.label24);
+            this.gbProps2.Controls.Add(this.label21);
+            this.gbProps2.Controls.Add(this.label23);
+            this.gbProps2.Controls.Add(this.label22);
+            this.gbProps2.Location = new System.Drawing.Point(6, 221);
+            this.gbProps2.Name = "gbProps2";
+            this.gbProps2.Size = new System.Drawing.Size(199, 173);
+            this.gbProps2.TabIndex = 46;
+            this.gbProps2.TabStop = false;
+            this.gbProps2.Text = "Properties 2";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 24);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(36, 13);
+            this.label13.TabIndex = 26;
+            this.label13.Text = "Model";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 40);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(87, 13);
+            this.label14.TabIndex = 27;
+            this.label14.Text = "Firmware Version";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 56);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(71, 13);
+            this.label15.TabIndex = 28;
+            this.label15.Text = "MAC Address";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 72);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(50, 13);
+            this.label16.TabIndex = 29;
+            this.label16.Text = "Serial Nr.";
+            // 
+            // lModel
+            // 
+            this.lModel.AutoSize = true;
+            this.lModel.Location = new System.Drawing.Point(91, 24);
+            this.lModel.Name = "lModel";
+            this.lModel.Size = new System.Drawing.Size(10, 13);
+            this.lModel.TabIndex = 30;
+            this.lModel.Text = " ";
+            // 
+            // lLiveState
+            // 
+            this.lLiveState.AutoSize = true;
+            this.lLiveState.Location = new System.Drawing.Point(91, 148);
+            this.lLiveState.Name = "lLiveState";
+            this.lLiveState.Size = new System.Drawing.Size(10, 13);
+            this.lLiveState.TabIndex = 41;
+            this.lLiveState.Text = " ";
+            // 
+            // lFirmware
+            // 
+            this.lFirmware.AutoSize = true;
+            this.lFirmware.Location = new System.Drawing.Point(91, 40);
+            this.lFirmware.Name = "lFirmware";
+            this.lFirmware.Size = new System.Drawing.Size(10, 13);
+            this.lFirmware.TabIndex = 31;
+            this.lFirmware.Text = " ";
+            // 
+            // lChannel
+            // 
+            this.lChannel.AutoSize = true;
+            this.lChannel.Location = new System.Drawing.Point(91, 132);
+            this.lChannel.Name = "lChannel";
+            this.lChannel.Size = new System.Drawing.Size(10, 13);
+            this.lChannel.TabIndex = 40;
+            this.lChannel.Text = " ";
+            // 
+            // lMACAddr
+            // 
+            this.lMACAddr.AutoSize = true;
+            this.lMACAddr.Location = new System.Drawing.Point(91, 56);
+            this.lMACAddr.Name = "lMACAddr";
+            this.lMACAddr.Size = new System.Drawing.Size(10, 13);
+            this.lMACAddr.TabIndex = 32;
+            this.lMACAddr.Text = " ";
+            // 
+            // lKey
+            // 
+            this.lKey.AutoSize = true;
+            this.lKey.Location = new System.Drawing.Point(91, 116);
+            this.lKey.Name = "lKey";
+            this.lKey.Size = new System.Drawing.Size(10, 13);
+            this.lKey.TabIndex = 39;
+            this.lKey.Text = " ";
+            // 
+            // lSN
+            // 
+            this.lSN.AutoSize = true;
+            this.lSN.Location = new System.Drawing.Point(91, 72);
+            this.lSN.Name = "lSN";
+            this.lSN.Size = new System.Drawing.Size(10, 13);
+            this.lSN.TabIndex = 33;
+            this.lSN.Text = " ";
+            // 
+            // lSSID
+            // 
+            this.lSSID.AutoSize = true;
+            this.lSSID.Location = new System.Drawing.Point(91, 100);
+            this.lSSID.Name = "lSSID";
+            this.lSSID.Size = new System.Drawing.Size(10, 13);
+            this.lSSID.TabIndex = 38;
+            this.lSSID.Text = " ";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(6, 100);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(32, 13);
+            this.label24.TabIndex = 34;
+            this.label24.Text = "SSID";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(6, 148);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(50, 13);
+            this.label21.TabIndex = 37;
+            this.label21.Text = "Livestate";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(6, 116);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(25, 13);
+            this.label23.TabIndex = 35;
+            this.label23.Text = "Key";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(6, 132);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(46, 13);
+            this.label22.TabIndex = 36;
+            this.label22.Text = "Channel";
+            // 
+            // gbProps1
+            // 
+            this.gbProps1.Controls.Add(this.cbWB);
+            this.gbProps1.Controls.Add(this.label9);
+            this.gbProps1.Controls.Add(this.cbShootMode);
+            this.gbProps1.Controls.Add(this.label8);
+            this.gbProps1.Controls.Add(this.cbExposureMode);
+            this.gbProps1.Controls.Add(this.label7);
+            this.gbProps1.Controls.Add(this.cbStillSize);
+            this.gbProps1.Controls.Add(this.label6);
+            this.gbProps1.Controls.Add(this.cbMovieSize);
+            this.gbProps1.Controls.Add(this.label10);
+            this.gbProps1.Controls.Add(this.cbEffect);
+            this.gbProps1.Controls.Add(this.label11);
+            this.gbProps1.Controls.Add(this.cbFilter);
+            this.gbProps1.Controls.Add(this.label12);
+            this.gbProps1.Location = new System.Drawing.Point(6, 6);
+            this.gbProps1.Name = "gbProps1";
+            this.gbProps1.Size = new System.Drawing.Size(199, 209);
+            this.gbProps1.TabIndex = 45;
+            this.gbProps1.TabStop = false;
+            this.gbProps1.Text = "Properties 1";
+            // 
+            // cbWB
+            // 
+            this.cbWB.FormattingEnabled = true;
+            this.cbWB.Location = new System.Drawing.Point(67, 19);
+            this.cbWB.Name = "cbWB";
+            this.cbWB.Size = new System.Drawing.Size(113, 21);
+            this.cbWB.TabIndex = 12;
+            this.cbWB.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 22);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(25, 13);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "WB";
+            // 
+            // cbShootMode
+            // 
+            this.cbShootMode.FormattingEnabled = true;
+            this.cbShootMode.Location = new System.Drawing.Point(67, 46);
+            this.cbShootMode.Name = "cbShootMode";
+            this.cbShootMode.Size = new System.Drawing.Size(113, 21);
+            this.cbShootMode.TabIndex = 13;
+            this.cbShootMode.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 49);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(62, 13);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "ShootMode";
+            // 
+            // cbExposureMode
+            // 
+            this.cbExposureMode.FormattingEnabled = true;
+            this.cbExposureMode.Location = new System.Drawing.Point(67, 73);
+            this.cbExposureMode.Name = "cbExposureMode";
+            this.cbExposureMode.Size = new System.Drawing.Size(113, 21);
+            this.cbExposureMode.TabIndex = 14;
+            this.cbExposureMode.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 76);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(55, 13);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Exp.Mode";
+            // 
+            // cbStillSize
+            // 
+            this.cbStillSize.FormattingEnabled = true;
+            this.cbStillSize.Location = new System.Drawing.Point(67, 100);
+            this.cbStillSize.Name = "cbStillSize";
+            this.cbStillSize.Size = new System.Drawing.Size(113, 21);
+            this.cbStillSize.TabIndex = 15;
+            this.cbStillSize.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 103);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(43, 13);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "StillSize";
+            // 
+            // cbMovieSize
+            // 
+            this.cbMovieSize.FormattingEnabled = true;
+            this.cbMovieSize.Location = new System.Drawing.Point(67, 127);
+            this.cbMovieSize.Name = "cbMovieSize";
+            this.cbMovieSize.Size = new System.Drawing.Size(113, 21);
+            this.cbMovieSize.TabIndex = 20;
+            this.cbMovieSize.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 130);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(56, 13);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "MovieSize";
+            // 
+            // cbEffect
+            // 
+            this.cbEffect.FormattingEnabled = true;
+            this.cbEffect.Location = new System.Drawing.Point(67, 154);
+            this.cbEffect.Name = "cbEffect";
+            this.cbEffect.Size = new System.Drawing.Size(113, 21);
+            this.cbEffect.TabIndex = 22;
+            this.cbEffect.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 157);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(35, 13);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Effect";
+            // 
+            // cbFilter
+            // 
+            this.cbFilter.FormattingEnabled = true;
+            this.cbFilter.Location = new System.Drawing.Point(67, 181);
+            this.cbFilter.Name = "cbFilter";
+            this.cbFilter.Size = new System.Drawing.Size(113, 21);
+            this.cbFilter.TabIndex = 24;
+            this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 184);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(29, 13);
+            this.label12.TabIndex = 25;
+            this.label12.Text = "Filter";
+            // 
             // cbLiveView
             // 
             this.cbLiveView.AutoSize = true;
-            this.cbLiveView.Location = new System.Drawing.Point(737, 145);
-            this.cbLiveView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbLiveView.Location = new System.Drawing.Point(406, 51);
+            this.cbLiveView.Margin = new System.Windows.Forms.Padding(2);
             this.cbLiveView.Name = "cbLiveView";
-            this.cbLiveView.Size = new System.Drawing.Size(83, 21);
+            this.cbLiveView.Size = new System.Drawing.Size(68, 17);
             this.cbLiveView.TabIndex = 44;
             this.cbLiveView.Text = "Liveview";
             this.cbLiveView.UseVisualStyleBackColor = true;
@@ -394,10 +684,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbLiveView.BackColor = System.Drawing.Color.LightGray;
-            this.pbLiveView.Location = new System.Drawing.Point(267, 174);
-            this.pbLiveView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pbLiveView.Location = new System.Drawing.Point(211, 72);
+            this.pbLiveView.Margin = new System.Windows.Forms.Padding(2);
             this.pbLiveView.Name = "pbLiveView";
-            this.pbLiveView.Size = new System.Drawing.Size(568, 243);
+            this.pbLiveView.Size = new System.Drawing.Size(409, 347);
             this.pbLiveView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbLiveView.TabIndex = 43;
             this.pbLiveView.TabStop = false;
@@ -405,424 +695,115 @@
             // btnGreen
             // 
             this.btnGreen.Image = global::Pentax_K_S2_Remote.Properties.Resources.green_button;
-            this.btnGreen.Location = new System.Drawing.Point(641, 14);
-            this.btnGreen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGreen.Location = new System.Drawing.Point(273, 6);
             this.btnGreen.Name = "btnGreen";
-            this.btnGreen.Size = new System.Drawing.Size(49, 44);
+            this.btnGreen.Size = new System.Drawing.Size(56, 56);
             this.btnGreen.TabIndex = 42;
+            this.toolTip1.SetToolTip(this.btnGreen, "Reset Parameter (Green button on camera)");
             this.btnGreen.UseVisualStyleBackColor = true;
             this.btnGreen.Click += new System.EventHandler(this.btnGreen_Click);
-            // 
-            // lLiveState
-            // 
-            this.lLiveState.AutoSize = true;
-            this.lLiveState.Location = new System.Drawing.Point(121, 215);
-            this.lLiveState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lLiveState.Name = "lLiveState";
-            this.lLiveState.Size = new System.Drawing.Size(12, 17);
-            this.lLiveState.TabIndex = 41;
-            this.lLiveState.Text = " ";
-            // 
-            // lChannel
-            // 
-            this.lChannel.AutoSize = true;
-            this.lChannel.Location = new System.Drawing.Point(121, 196);
-            this.lChannel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lChannel.Name = "lChannel";
-            this.lChannel.Size = new System.Drawing.Size(12, 17);
-            this.lChannel.TabIndex = 40;
-            this.lChannel.Text = " ";
-            // 
-            // lKey
-            // 
-            this.lKey.AutoSize = true;
-            this.lKey.Location = new System.Drawing.Point(121, 176);
-            this.lKey.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lKey.Name = "lKey";
-            this.lKey.Size = new System.Drawing.Size(12, 17);
-            this.lKey.TabIndex = 39;
-            this.lKey.Text = " ";
-            // 
-            // lSSID
-            // 
-            this.lSSID.AutoSize = true;
-            this.lSSID.Location = new System.Drawing.Point(121, 156);
-            this.lSSID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lSSID.Name = "lSSID";
-            this.lSSID.Size = new System.Drawing.Size(12, 17);
-            this.lSSID.TabIndex = 38;
-            this.lSSID.Text = " ";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(8, 215);
-            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(65, 17);
-            this.label21.TabIndex = 37;
-            this.label21.Text = "Livestate";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(8, 196);
-            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(60, 17);
-            this.label22.TabIndex = 36;
-            this.label22.Text = "Channel";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(8, 176);
-            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(32, 17);
-            this.label23.TabIndex = 35;
-            this.label23.Text = "Key";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(8, 156);
-            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(39, 17);
-            this.label24.TabIndex = 34;
-            this.label24.Text = "SSID";
-            // 
-            // lSN
-            // 
-            this.lSN.AutoSize = true;
-            this.lSN.Location = new System.Drawing.Point(121, 122);
-            this.lSN.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lSN.Name = "lSN";
-            this.lSN.Size = new System.Drawing.Size(12, 17);
-            this.lSN.TabIndex = 33;
-            this.lSN.Text = " ";
-            // 
-            // lMACAddr
-            // 
-            this.lMACAddr.AutoSize = true;
-            this.lMACAddr.Location = new System.Drawing.Point(121, 102);
-            this.lMACAddr.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lMACAddr.Name = "lMACAddr";
-            this.lMACAddr.Size = new System.Drawing.Size(12, 17);
-            this.lMACAddr.TabIndex = 32;
-            this.lMACAddr.Text = " ";
-            // 
-            // lFirmware
-            // 
-            this.lFirmware.AutoSize = true;
-            this.lFirmware.Location = new System.Drawing.Point(121, 82);
-            this.lFirmware.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lFirmware.Name = "lFirmware";
-            this.lFirmware.Size = new System.Drawing.Size(12, 17);
-            this.lFirmware.TabIndex = 31;
-            this.lFirmware.Text = " ";
-            // 
-            // lModel
-            // 
-            this.lModel.AutoSize = true;
-            this.lModel.Location = new System.Drawing.Point(121, 63);
-            this.lModel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lModel.Name = "lModel";
-            this.lModel.Size = new System.Drawing.Size(12, 17);
-            this.lModel.TabIndex = 30;
-            this.lModel.Text = " ";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(8, 122);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(67, 17);
-            this.label16.TabIndex = 29;
-            this.label16.Text = "Serial Nr.";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(8, 102);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(93, 17);
-            this.label15.TabIndex = 28;
-            this.label15.Text = "MAC Address";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(8, 82);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(117, 17);
-            this.label14.TabIndex = 27;
-            this.label14.Text = "Firmware Version";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(8, 63);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(46, 17);
-            this.label13.TabIndex = 26;
-            this.label13.Text = "Model";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(371, 122);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(39, 17);
-            this.label12.TabIndex = 25;
-            this.label12.Text = "Filter";
-            // 
-            // cbFilter
-            // 
-            this.cbFilter.FormattingEnabled = true;
-            this.cbFilter.Location = new System.Drawing.Point(375, 142);
-            this.cbFilter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cbFilter.Name = "cbFilter";
-            this.cbFilter.Size = new System.Drawing.Size(140, 24);
-            this.cbFilter.TabIndex = 24;
-            this.cbFilter.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(264, 122);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(44, 17);
-            this.label11.TabIndex = 23;
-            this.label11.Text = "Effect";
-            // 
-            // cbEffect
-            // 
-            this.cbEffect.FormattingEnabled = true;
-            this.cbEffect.Location = new System.Drawing.Point(268, 142);
-            this.cbEffect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cbEffect.Name = "cbEffect";
-            this.cbEffect.Size = new System.Drawing.Size(97, 24);
-            this.cbEffect.TabIndex = 22;
-            this.cbEffect.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(669, 63);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 17);
-            this.label10.TabIndex = 21;
-            this.label10.Text = "MovieSize";
-            // 
-            // cbMovieSize
-            // 
-            this.cbMovieSize.FormattingEnabled = true;
-            this.cbMovieSize.Location = new System.Drawing.Point(673, 82);
-            this.cbMovieSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cbMovieSize.Name = "cbMovieSize";
-            this.cbMovieSize.Size = new System.Drawing.Size(88, 24);
-            this.cbMovieSize.TabIndex = 20;
-            this.cbMovieSize.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(595, 63);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 17);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "StillSize";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(520, 63);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 17);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "Exp.Mode";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(371, 63);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 17);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "ShootMode";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(264, 63);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(30, 17);
-            this.label9.TabIndex = 16;
-            this.label9.Text = "WB";
-            // 
-            // cbStillSize
-            // 
-            this.cbStillSize.FormattingEnabled = true;
-            this.cbStillSize.Location = new System.Drawing.Point(599, 82);
-            this.cbStillSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cbStillSize.Name = "cbStillSize";
-            this.cbStillSize.Size = new System.Drawing.Size(65, 24);
-            this.cbStillSize.TabIndex = 15;
-            this.cbStillSize.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
-            // 
-            // cbExposureMode
-            // 
-            this.cbExposureMode.FormattingEnabled = true;
-            this.cbExposureMode.Location = new System.Drawing.Point(524, 82);
-            this.cbExposureMode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cbExposureMode.Name = "cbExposureMode";
-            this.cbExposureMode.Size = new System.Drawing.Size(65, 24);
-            this.cbExposureMode.TabIndex = 14;
-            this.cbExposureMode.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
-            // 
-            // cbShootMode
-            // 
-            this.cbShootMode.FormattingEnabled = true;
-            this.cbShootMode.Location = new System.Drawing.Point(375, 82);
-            this.cbShootMode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cbShootMode.Name = "cbShootMode";
-            this.cbShootMode.Size = new System.Drawing.Size(140, 24);
-            this.cbShootMode.TabIndex = 13;
-            this.cbShootMode.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
-            // 
-            // cbWB
-            // 
-            this.cbWB.FormattingEnabled = true;
-            this.cbWB.Location = new System.Drawing.Point(268, 82);
-            this.cbWB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cbWB.Name = "cbWB";
-            this.cbWB.Size = new System.Drawing.Size(97, 24);
-            this.cbWB.TabIndex = 12;
-            this.cbWB.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(503, 14);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(582, 9);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(24, 17);
+            this.label5.Size = new System.Drawing.Size(20, 13);
             this.label5.TabIndex = 11;
             this.label5.Text = "Xv";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(428, 14);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(526, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(24, 17);
+            this.label4.Size = new System.Drawing.Size(20, 13);
             this.label4.TabIndex = 10;
             this.label4.Text = "Sv";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(353, 14);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(470, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(24, 17);
+            this.label3.Size = new System.Drawing.Size(20, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "Tv";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(264, 14);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(403, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(24, 17);
+            this.label2.Size = new System.Drawing.Size(20, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "Av";
             // 
             // cbXv
             // 
             this.cbXv.FormattingEnabled = true;
-            this.cbXv.Location = new System.Drawing.Point(492, 33);
-            this.cbXv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbXv.Location = new System.Drawing.Point(574, 25);
             this.cbXv.Name = "cbXv";
-            this.cbXv.Size = new System.Drawing.Size(65, 24);
+            this.cbXv.Size = new System.Drawing.Size(50, 21);
             this.cbXv.TabIndex = 7;
             this.cbXv.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
             // 
             // cbSv
             // 
             this.cbSv.FormattingEnabled = true;
-            this.cbSv.Location = new System.Drawing.Point(417, 33);
-            this.cbSv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbSv.Location = new System.Drawing.Point(518, 25);
             this.cbSv.Name = "cbSv";
-            this.cbSv.Size = new System.Drawing.Size(65, 24);
+            this.cbSv.Size = new System.Drawing.Size(50, 21);
             this.cbSv.TabIndex = 6;
             this.cbSv.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
             // 
             // cbTv
             // 
             this.cbTv.FormattingEnabled = true;
-            this.cbTv.Location = new System.Drawing.Point(343, 33);
-            this.cbTv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbTv.Location = new System.Drawing.Point(462, 25);
             this.cbTv.Name = "cbTv";
-            this.cbTv.Size = new System.Drawing.Size(65, 24);
+            this.cbTv.Size = new System.Drawing.Size(50, 21);
             this.cbTv.TabIndex = 5;
             this.cbTv.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
             // 
             // cbAv
             // 
             this.cbAv.FormattingEnabled = true;
-            this.cbAv.Location = new System.Drawing.Point(268, 33);
-            this.cbAv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbAv.Location = new System.Drawing.Point(406, 25);
             this.cbAv.Name = "cbAv";
-            this.cbAv.Size = new System.Drawing.Size(65, 24);
+            this.cbAv.Size = new System.Drawing.Size(50, 21);
             this.cbAv.TabIndex = 4;
             this.cbAv.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedIndexChanged);
             // 
-            // button1
+            // btnGetParameter
             // 
-            this.button1.Location = new System.Drawing.Point(117, 7);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 28);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Get Parameter";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnGetParameter_Click);
+            this.btnGetParameter.Image = global::Pentax_K_S2_Remote.Properties.Resources.view_refresh;
+            this.btnGetParameter.Location = new System.Drawing.Point(211, 6);
+            this.btnGetParameter.Name = "btnGetParameter";
+            this.btnGetParameter.Size = new System.Drawing.Size(56, 56);
+            this.btnGetParameter.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.btnGetParameter, "Get Parameter");
+            this.btnGetParameter.UseVisualStyleBackColor = true;
+            this.btnGetParameter.Click += new System.EventHandler(this.btnGetParameter_Click);
             // 
             // btnShoot
             // 
-            this.btnShoot.Location = new System.Drawing.Point(9, 7);
-            this.btnShoot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnShoot.Image = global::Pentax_K_S2_Remote.Properties.Resources.camera_lens;
+            this.btnShoot.Location = new System.Drawing.Point(335, 6);
             this.btnShoot.Name = "btnShoot";
-            this.btnShoot.Size = new System.Drawing.Size(100, 28);
+            this.btnShoot.Size = new System.Drawing.Size(56, 56);
             this.btnShoot.TabIndex = 0;
-            this.btnShoot.Text = "Shoot";
+            this.toolTip1.SetToolTip(this.btnShoot, "Take a picture");
             this.btnShoot.UseVisualStyleBackColor = true;
             this.btnShoot.Click += new System.EventHandler(this.btnShoot_Click);
             // 
             // tpPhotos
             // 
             this.tpPhotos.Controls.Add(this.splitContainerPictureview);
-            this.tpPhotos.Location = new System.Drawing.Point(4, 25);
-            this.tpPhotos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpPhotos.Location = new System.Drawing.Point(4, 22);
             this.tpPhotos.Name = "tpPhotos";
-            this.tpPhotos.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tpPhotos.Size = new System.Drawing.Size(838, 422);
+            this.tpPhotos.Padding = new System.Windows.Forms.Padding(3);
+            this.tpPhotos.Size = new System.Drawing.Size(625, 424);
             this.tpPhotos.TabIndex = 1;
             this.tpPhotos.Text = "Photos";
             this.tpPhotos.UseVisualStyleBackColor = true;
@@ -833,8 +814,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainerPictureview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainerPictureview.Location = new System.Drawing.Point(3, 2);
-            this.splitContainerPictureview.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.splitContainerPictureview.Location = new System.Drawing.Point(2, 2);
+            this.splitContainerPictureview.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainerPictureview.Name = "splitContainerPictureview";
             // 
             // splitContainerPictureview.Panel1
@@ -847,8 +828,9 @@
             // 
             this.splitContainerPictureview.Panel2.Controls.Add(this.toolStrip2);
             this.splitContainerPictureview.Panel2.Controls.Add(this.pbPreview);
-            this.splitContainerPictureview.Size = new System.Drawing.Size(832, 411);
-            this.splitContainerPictureview.SplitterDistance = 307;
+            this.splitContainerPictureview.Size = new System.Drawing.Size(623, 420);
+            this.splitContainerPictureview.SplitterDistance = 230;
+            this.splitContainerPictureview.SplitterWidth = 3;
             this.splitContainerPictureview.TabIndex = 10;
             this.splitContainerPictureview.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainerPictureview_SplitterMoved);
             // 
@@ -864,8 +846,8 @@
             this.tvaFiles.DefaultToolTipProvider = null;
             this.tvaFiles.DragDropMarkColor = System.Drawing.Color.Black;
             this.tvaFiles.LineColor = System.Drawing.SystemColors.ControlDark;
-            this.tvaFiles.Location = new System.Drawing.Point(0, 42);
-            this.tvaFiles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tvaFiles.Location = new System.Drawing.Point(0, 34);
+            this.tvaFiles.Margin = new System.Windows.Forms.Padding(2);
             this.tvaFiles.Model = null;
             this.tvaFiles.Name = "tvaFiles";
             this.tvaFiles.NodeControls.Add(this.nodeCheckBox1);
@@ -873,7 +855,7 @@
             this.tvaFiles.NodeControls.Add(this.nodeTextBox1);
             this.tvaFiles.RowHeight = 40;
             this.tvaFiles.SelectedNode = null;
-            this.tvaFiles.Size = new System.Drawing.Size(302, 364);
+            this.tvaFiles.Size = new System.Drawing.Size(226, 382);
             this.tvaFiles.TabIndex = 9;
             this.tvaFiles.UseColumns = true;
             this.tvaFiles.NodeMouseClick += new System.EventHandler<Aga.Controls.Tree.TreeNodeAdvMouseEventArgs>(this.tvaFiles_NodeMouseClick);
@@ -930,10 +912,9 @@
             // 
             // btnGetFileList
             // 
-            this.btnGetFileList.Location = new System.Drawing.Point(4, 4);
-            this.btnGetFileList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGetFileList.Location = new System.Drawing.Point(3, 3);
             this.btnGetFileList.Name = "btnGetFileList";
-            this.btnGetFileList.Size = new System.Drawing.Size(120, 28);
+            this.btnGetFileList.Size = new System.Drawing.Size(90, 23);
             this.btnGetFileList.TabIndex = 5;
             this.btnGetFileList.Text = "Get File list";
             this.btnGetFileList.UseVisualStyleBackColor = true;
@@ -949,7 +930,7 @@
             this.tsbImageSaveAs});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(519, 27);
+            this.toolStrip2.Size = new System.Drawing.Size(388, 25);
             this.toolStrip2.TabIndex = 7;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -957,23 +938,23 @@
             // 
             this.tstbImagePath.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tstbImagePath.Name = "tstbImagePath";
-            this.tstbImagePath.Size = new System.Drawing.Size(200, 27);
+            this.tstbImagePath.Size = new System.Drawing.Size(151, 25);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // tstbImageSize
             // 
             this.tstbImageSize.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tstbImageSize.Name = "tstbImageSize";
-            this.tstbImageSize.Size = new System.Drawing.Size(120, 27);
+            this.tstbImageSize.Size = new System.Drawing.Size(91, 25);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // tsbImageSaveAs
             // 
@@ -981,7 +962,7 @@
             this.tsbImageSaveAs.Image = global::Pentax_K_S2_Remote.Properties.Resources.document_save_as;
             this.tsbImageSaveAs.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbImageSaveAs.Name = "tsbImageSaveAs";
-            this.tsbImageSaveAs.Size = new System.Drawing.Size(23, 24);
+            this.tsbImageSaveAs.Size = new System.Drawing.Size(23, 22);
             this.tsbImageSaveAs.Text = "Save Image as";
             this.tsbImageSaveAs.Click += new System.EventHandler(this.tsbImageSaveAs_Click);
             // 
@@ -992,10 +973,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbPreview.BackColor = System.Drawing.Color.Gray;
             this.pbPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pbPreview.Location = new System.Drawing.Point(3, 27);
-            this.pbPreview.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pbPreview.Location = new System.Drawing.Point(2, 22);
+            this.pbPreview.Margin = new System.Windows.Forms.Padding(2);
             this.pbPreview.Name = "pbPreview";
-            this.pbPreview.Size = new System.Drawing.Size(547, 381);
+            this.pbPreview.Size = new System.Drawing.Size(382, 394);
             this.pbPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPreview.TabIndex = 6;
             this.pbPreview.TabStop = false;
@@ -1005,22 +986,20 @@
             this.tbDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDebug.Location = new System.Drawing.Point(4, 230);
-            this.tbDebug.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbDebug.Location = new System.Drawing.Point(3, 187);
             this.tbDebug.Multiline = true;
             this.tbDebug.Name = "tbDebug";
             this.tbDebug.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbDebug.Size = new System.Drawing.Size(272, 227);
+            this.tbDebug.Size = new System.Drawing.Size(204, 269);
             this.tbDebug.TabIndex = 1;
             // 
             // rtbDebug
             // 
             this.rtbDebug.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbDebug.Location = new System.Drawing.Point(4, 31);
-            this.rtbDebug.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rtbDebug.Location = new System.Drawing.Point(3, 25);
             this.rtbDebug.Name = "rtbDebug";
-            this.rtbDebug.Size = new System.Drawing.Size(272, 191);
+            this.rtbDebug.Size = new System.Drawing.Size(204, 156);
             this.rtbDebug.TabIndex = 6;
             this.rtbDebug.Text = "";
             // 
@@ -1030,8 +1009,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainerDebug.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainerDebug.Location = new System.Drawing.Point(0, 64);
-            this.splitContainerDebug.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainerDebug.Location = new System.Drawing.Point(0, 52);
             this.splitContainerDebug.Name = "splitContainerDebug";
             // 
             // splitContainerDebug.Panel1
@@ -1044,19 +1022,17 @@
             this.splitContainerDebug.Panel2.Controls.Add(this.label1);
             this.splitContainerDebug.Panel2.Controls.Add(this.rtbDebug);
             this.splitContainerDebug.Panel2.Controls.Add(this.tbDebug);
-            this.splitContainerDebug.Size = new System.Drawing.Size(1163, 458);
-            this.splitContainerDebug.SplitterDistance = 856;
-            this.splitContainerDebug.SplitterWidth = 5;
+            this.splitContainerDebug.Size = new System.Drawing.Size(872, 456);
+            this.splitContainerDebug.SplitterDistance = 641;
             this.splitContainerDebug.TabIndex = 4;
             this.splitContainerDebug.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainerDebug_SplitterMoved);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 5);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(4, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(118, 17);
+            this.label1.Size = new System.Drawing.Size(90, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "Debug Messages";
             // 
@@ -1067,16 +1043,15 @@
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1163, 553);
+            this.ClientSize = new System.Drawing.Size(872, 533);
             this.Controls.Add(this.splitContainerDebug);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormMain";
             this.Text = "Pentax K-S2 WiFi Remote";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
@@ -1090,6 +1065,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tpCamera.ResumeLayout(false);
             this.tpCamera.PerformLayout();
+            this.gbProps2.ResumeLayout(false);
+            this.gbProps2.PerformLayout();
+            this.gbProps1.ResumeLayout(false);
+            this.gbProps1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLiveView)).EndInit();
             this.tpPhotos.ResumeLayout(false);
             this.splitContainerPictureview.Panel1.ResumeLayout(false);
@@ -1127,7 +1106,7 @@
         private System.Windows.Forms.Button btnShoot;
         private System.Windows.Forms.TextBox tbDebug;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGetParameter;
         private System.Windows.Forms.PictureBox pbPreview;
         private System.Windows.Forms.Button btnGetFileList;
         private System.Windows.Forms.RichTextBox rtbDebug;
@@ -1199,6 +1178,8 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripProgressBar tspbImageDownload;
         private System.Windows.Forms.ToolStripButton tsbDebug;
+        private System.Windows.Forms.GroupBox gbProps2;
+        private System.Windows.Forms.GroupBox gbProps1;
     }
 }
 

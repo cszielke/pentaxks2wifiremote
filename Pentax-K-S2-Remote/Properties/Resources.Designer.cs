@@ -63,6 +63,16 @@ namespace Pentax_K_S2_Remote.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap camera_lens {
+            get {
+                object obj = ResourceManager.GetObject("camera_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap document_save_as {
             get {
                 object obj = ResourceManager.GetObject("document_save_as", resourceCulture);
@@ -176,6 +186,16 @@ namespace Pentax_K_S2_Remote.Properties {
         internal static System.Drawing.Bitmap preferencex_system {
             get {
                 object obj = ResourceManager.GetObject("preferencex_system", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap view_refresh {
+            get {
+                object obj = ResourceManager.GetObject("view_refresh", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

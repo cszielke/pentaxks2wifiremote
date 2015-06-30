@@ -614,7 +614,16 @@ namespace Pentax_K_S2_Remote
             {
                 WaitCursor();
                 string url = string.Format("http://{0}/v1/photos/" + tstbImagePath.Text, Properties.Settings.Default.IPAdressCamera);
-                PtxK_S2.http.DownloadRemoteImageFile(url, saveFileDialog1.FileName);
+                
+                PtxK_S2.http cam = new PtxK_S2.http();
+                if (cam.DownloadRemoteImageFile(url, saveFileDialog1.FileName))
+                {
+                    tsslMessage.Text = "Image download done";
+                }
+                else
+                {
+                    tsslMessage.Text = "Image download fail";
+                }
 
                 Properties.Settings.Default.LastImageSaveDir = Path.GetFullPath(saveFileDialog1.FileName);
                 RestoreCursor();

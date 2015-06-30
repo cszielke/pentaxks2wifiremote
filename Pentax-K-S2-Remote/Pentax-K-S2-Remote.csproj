@@ -203,13 +203,19 @@
     <None Include="Resources\Pentax-Remote-Logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\green-button.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\lightningbug-off.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\lightningbug-on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\camera_lens.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view-refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green-button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

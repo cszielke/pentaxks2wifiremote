@@ -16,47 +16,6 @@ namespace PtxK_S2
 
         public bool useDefaultProxy = false;
 
-        public void HttpGet(string strUrl, out string strContent, out string strErrCode, out DateTime dtGrabTime)
-        {
-            strErrCode = "";
-            StringBuilder strBuildContent = new StringBuilder();
-            WebRequest WebReq = WebRequest.Create(strUrl);
-            dtGrabTime = DateTime.Now;
-
-            if (useDefaultProxy)
-            {
-                WebReq.Proxy = WebRequest.DefaultWebProxy;
-                WebReq.Credentials = CredentialCache.DefaultCredentials;
-            }
-            else
-            {
-                WebRequest.DefaultWebProxy = null;
-                WebReq.Proxy = System.Net.WebRequest.DefaultWebProxy;
-            }
-
-            try
-            {
-                WebResponse WebResp = WebReq.GetResponse();
-
-                StreamReader MyStrmR = new StreamReader(WebResp.GetResponseStream(), Encoding.UTF8);
-
-
-
-                while (!MyStrmR.EndOfStream)
-                {
-                    //while (-1 != MyStrmR.Peek())
-                    //{
-                    strBuildContent.Append(MyStrmR.ReadToEnd());
-                    //}
-                }
-            }
-            catch (Exception e)
-            {
-                strErrCode = e.ToString();
-            }
-            strContent = strBuildContent.ToString();
-        }
-
         public void HttpSend(string strUrl, string Methode, string PostContent, out string strContent, out string strErrCode)
         {
             strErrCode = "";
@@ -81,6 +40,7 @@ namespace PtxK_S2
                 WebReq.ContentLength = byteArray.Length;
                 WebReq.ContentType = "text/xml";
                 WebReq.Timeout = 3000;
+                WebReq.ConnectionGroupName = GetHashCode().ToString()+strUrl;
 
                 //Bei POST und PUT Request Content setzen
                 if ((Methode.ToUpper() == "POST")||(Methode.ToUpper() == "PUT"))
@@ -108,9 +68,10 @@ namespace PtxK_S2
             strContent = strBuildContent.ToString();
         }
 
-        public static bool DownloadRemoteImageFile(string uri, string fileName)
+        public bool DownloadRemoteImageFile(string uri, string fileName)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            request.ConnectionGroupName = GetHashCode().ToString() + uri;
             request.Timeout = 3000;
             HttpWebResponse response;
             try
