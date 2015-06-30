@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAbout));
             this.btnOK = new System.Windows.Forms.Button();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.lCopyright = new System.Windows.Forms.Label();
@@ -42,14 +43,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lVersion = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lKPWeb = new System.Windows.Forms.LinkLabel();
+            this.llWeb = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOK
             // 
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(107, 186);
+            this.btnOK.Location = new System.Drawing.Point(118, 186);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(104, 40);
             this.btnOK.TabIndex = 0;
@@ -142,7 +143,7 @@
             // lBuild
             // 
             this.lBuild.AutoSize = true;
-            this.lBuild.Location = new System.Drawing.Point(251, 104);
+            this.lBuild.Location = new System.Drawing.Point(238, 104);
             this.lBuild.Name = "lBuild";
             this.lBuild.Size = new System.Drawing.Size(32, 13);
             this.lBuild.TabIndex = 25;
@@ -151,7 +152,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(203, 104);
+            this.label2.Location = new System.Drawing.Point(190, 104);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 24;
@@ -160,7 +161,7 @@
             // lVersion
             // 
             this.lVersion.AutoSize = true;
-            this.lVersion.Location = new System.Drawing.Point(251, 91);
+            this.lVersion.Location = new System.Drawing.Point(238, 91);
             this.lVersion.Name = "lVersion";
             this.lVersion.Size = new System.Drawing.Size(44, 13);
             this.lVersion.TabIndex = 22;
@@ -169,27 +170,28 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(203, 91);
+            this.label1.Location = new System.Drawing.Point(190, 91);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 21;
             this.label1.Text = "Version";
             // 
-            // lKPWeb
+            // llWeb
             // 
-            this.lKPWeb.AutoSize = true;
-            this.lKPWeb.Location = new System.Drawing.Point(12, 78);
-            this.lKPWeb.Name = "lKPWeb";
-            this.lKPWeb.Size = new System.Drawing.Size(114, 13);
-            this.lKPWeb.TabIndex = 18;
-            this.lKPWeb.TabStop = true;
-            this.lKPWeb.Text = "http://k-s2.cszielke.de";
+            this.llWeb.AutoSize = true;
+            this.llWeb.Location = new System.Drawing.Point(12, 78);
+            this.llWeb.Name = "llWeb";
+            this.llWeb.Size = new System.Drawing.Size(163, 13);
+            this.llWeb.TabIndex = 18;
+            this.llWeb.TabStop = true;
+            this.llWeb.Text = "http://pentaxks2wifiremote.sf.net";
+            this.llWeb.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llWeb_LinkClicked);
             // 
             // FormAbout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(316, 238);
+            this.ClientSize = new System.Drawing.Size(332, 238);
             this.Controls.Add(this.pbLogo);
             this.Controls.Add(this.lCopyright);
             this.Controls.Add(this.label10);
@@ -203,11 +205,13 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lVersion);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.lKPWeb);
+            this.Controls.Add(this.llWeb);
             this.Controls.Add(this.btnOK);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormAbout";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FormAbout";
+            this.Text = "About";
             this.Shown += new System.EventHandler(this.FormAbout_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.ResumeLayout(false);
@@ -231,6 +235,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lVersion;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel lKPWeb;
+        private System.Windows.Forms.LinkLabel llWeb;
     }
 }

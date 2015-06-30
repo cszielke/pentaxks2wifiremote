@@ -16,16 +16,16 @@ namespace Pentax_K_S2_Remote
         {
             InitializeComponent();
         }
-        private void lKPWeb_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void llWeb_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try
             {
                 // Change the color of the link text by setting LinkVisited 
                 // to true.
-                lKPWeb.LinkVisited = true;
+                llWeb.LinkVisited = true;
                 //Call the Process.Start method to open the default browser 
                 //with a URL:
-                System.Diagnostics.Process.Start(lKPWeb.Text);
+                System.Diagnostics.Process.Start(llWeb.Text);
             }
             catch (Exception ex)
             {
