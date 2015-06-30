@@ -186,6 +186,7 @@ namespace Pentax_K_S2_Remote
 
             tsslMessage.Text = "";
 
+            btnGetParameter_Click(this, null); //Get parameter at program start
 
         }
         #endregion Form functions
@@ -251,46 +252,82 @@ namespace Pentax_K_S2_Remote
         /// <param name="e"></param>
         private void btnShoot_Click(object sender, EventArgs e)
         {
-            log.Debug("Shoot");
-
-            WaitCursor();
+            string param;
             
-            if(ks2.Shoot("af=auto"))
+            WaitCursor();
+                        
+            switch (getCheckedRadioButton(gbAutofocus))
             {
-                tbDebug.Text = ks2.Content;
+                case 2: param = "af=auto"; break;
+                case 1: param = "af=on"; break;
+                case 0: param = "af=off"; break;
+                default: param = ""; break;
+            }
+            
+            log.DebugFormat("Shoot param: {0}", param);
+
+            if (!ks2.Shoot(param))
+            {
+                tbDebug.Text = ks2.ErrCode;
+                tsslMessage.Text = "Takeing image failed";
             }
             else
             {
-                tbDebug.Text = ks2.ErrCode;
-            }
-
-            //Get latest image infos
-            //Check, if Image is ready
-            int timeout = 20;
-            bool success = true;
-            while ((success = ks2.GetImageInfo("latest", "")) && (!ks2.PhotoInfo.captured) && (timeout > 0))
-            {
-                timeout--;
-                Thread.Sleep(200);
-            }
-
-            //Get latest image and display at liveview picturebox
-            if (success)
-            {
                 tbDebug.Text = ks2.Content;
-                if (cbLiveView.Checked == false)
+
+                //Get latest image infos
+                //Check, if Image is ready
+                int timeout = 20;
+                bool success = true;
+                while ((success = ks2.GetImageInfo("latest", "")) && (!ks2.PhotoInfo.captured) && (timeout > 0))
                 {
-                    pbLiveView.Image = ks2.GetImage(ks2.PhotoInfo.dir, ks2.PhotoInfo.file, "view");
+                    timeout--;
+                    Thread.Sleep(200);
                 }
-            }
-            else
-            {
-                tbDebug.Text = ks2.ErrCode;
+
+                //Get latest image and display at liveview picturebox
+                if (success)
+                {
+                    tsslMessage.Text = "Takeing image success";
+                    tbDebug.Text = ks2.Content;
+                    if (cbLiveView.Checked == false)
+                    {
+                        pbLiveView.Image = ks2.GetImage(ks2.PhotoInfo.dir, ks2.PhotoInfo.file, "view");
+                    }
+                }
+                else
+                {
+                    tbDebug.Text = ks2.ErrCode;
+                    tsslMessage.Text = "Coudn't get Image";
+                }
             }
 
             
             RestoreCursor();
         }
+
+        private int getCheckedRadioButton(Control c)
+        {
+            int i;
+            try
+            {
+                Control.ControlCollection cc = c.Controls;
+                for (i = 0; i < cc.Count; i++)
+                {
+                    RadioButton rb = cc[i] as RadioButton;
+                    if (rb.Checked)
+                    {
+                        return i;
+                    }
+                }
+            }
+            catch
+            {
+                i = -1;
+            }
+            return i;
+        }
+
 
         /// <summary>
         /// Get the Camera Parameter
@@ -307,10 +344,12 @@ namespace Pentax_K_S2_Remote
             {
                 UpdateParameter(ks2.Parameter);
                 tbDebug.Text = ks2.Content;
+                tsslMessage.Text = "Get parameter success";
             }
             else
             {
                 tbDebug.Text = ks2.ErrCode;
+                tsslMessage.Text = "Get parameter failed";
             }
 
             RestoreCursor();
@@ -333,10 +372,12 @@ namespace Pentax_K_S2_Remote
             {
                 UpdateParameter(ks2.Parameter);
                 tbDebug.Text = ks2.Content;
+                tsslMessage.Text = "Change parameter success";
             }
             else
             {
                 tbDebug.Text = ks2.ErrCode;
+                tsslMessage.Text = "Change parameter failed";
             }
             
             RestoreCursor();
@@ -476,10 +517,12 @@ namespace Pentax_K_S2_Remote
                 
 
                 tbDebug.Text = ks2.Content;
+                tsslMessage.Text = "Get file list success";
             }
             else
             {
                 tbDebug.Text = ks2.ErrCode;
+                tsslMessage.Text = "Get file list failed";
             }
 
             RestoreCursor();
@@ -707,6 +750,12 @@ namespace Pentax_K_S2_Remote
                 tsslMessage.Text = "Debug windows hidden";
 
             }
+        }
+
+        private void clbAF_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idx = (sender as CheckedListBox).SelectedIndex;
+            log.DebugFormat("AF={0}", idx);
         }
 
     }

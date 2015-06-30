@@ -309,6 +309,8 @@ namespace PtxK_S2
                 else
                 {
                     var request = WebRequest.Create(url);
+                    request.ConnectionGroupName = GetHashCode().ToString() + filepath;
+
                     request.Timeout = 3000;
 
                     using (var response = request.GetResponse())
