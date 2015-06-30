@@ -424,11 +424,60 @@ namespace PtxK_S2
         #region Helper
         private void SetParameterIfNotNull(parameter param)
         {
+            //returncodes
+            if (param.errCode != null) Parameter.errCode = param.errCode;
+            if (param.errMsg != null) Parameter.errMsg = param.errMsg;
+
+            //Lists of possible parameters
+            if (param.avList != null) Parameter.avList = param.avList;
+            if (param.tvList != null) Parameter.tvList = param.tvList;
+            if (param.svList != null) Parameter.svList = param.svList;
+            if (param.xvList != null) Parameter.xvList = param.xvList;
+            if (param.effectList != null) Parameter.effectList = param.effectList;
+            if (param.exposureModeList != null) Parameter.exposureModeList = param.exposureModeList;
+            if (param.filterList != null) Parameter.filterList = param.filterList;
+            if (param.movieResoList != null) Parameter.movieResoList = param.movieResoList;
+            if (param.movieSizeList != null) Parameter.movieSizeList = param.movieSizeList;
+            if (param.resoList != null) Parameter.resoList = param.resoList;
+            if (param.stillSizeList != null) Parameter.stillSizeList = param.stillSizeList;
+            if (param.WBModeList != null) Parameter.WBModeList = param.WBModeList;
+            if (param.shootModeList != null) Parameter.shootModeList = param.shootModeList;
+
+            //Picture parameter
             if (param.av != null) Parameter.av = param.av;
             if (param.tv != null) Parameter.tv = param.tv;
             if (param.sv != null) Parameter.sv = param.sv;
             if (param.xv != null) Parameter.xv = param.xv;
-            //TODO: alles implementieren
+            if (param.effect != null) Parameter.effect = param.effect;
+            if (param.exposureMode != null) Parameter.exposureMode = param.exposureMode;
+            if (param.exposureModeOption != null) Parameter.exposureModeOption = param.exposureModeOption;
+            if (param.filter != null) Parameter.filter = param.filter;
+            if (param.focusCenters != null) Parameter.focusCenters = param.focusCenters;
+            if (param.focused != null) Parameter.focused = param.focused;
+            if (param.focusMode != null) Parameter.focusMode = param.focusMode;
+            if (param.liveState != null) Parameter.liveState = param.liveState;
+            if (param.movieSize != null) Parameter.movieSize = param.movieSize;
+            if (param.shootMode != null) Parameter.shootMode = param.shootMode;
+            if (param.state != null) Parameter.state = param.state;
+            if (param.stillSize != null) Parameter.stillSize = param.stillSize;
+            if (param.WBMode != null) Parameter.WBMode = param.WBMode;
+
+            //Storage information
+            if (param.storages != null) Parameter.storages = param.storages;
+
+            //Camera information
+            if (param.serialNo != null) Parameter.serialNo = param.serialNo;
+            if (param.firmwareVersion != null) Parameter.firmwareVersion = param.firmwareVersion;
+            if (param.macAddress != null) Parameter.macAddress = param.macAddress;
+            if (param.model != null) Parameter.model = param.model;
+            if (param.hot != null) Parameter.hot = param.hot;
+            if (param.battery != null) Parameter.battery = param.battery;
+
+            //WLAN
+            if (param.channel != null) Parameter.channel = param.channel;
+            if (param.channelList != null) Parameter.channelList = param.channelList;
+            if (param.ssid != null) Parameter.ssid = param.ssid;
+            if (param.key != null) Parameter.key = param.key;
         }
         #endregion Helper
     }
