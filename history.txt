@@ -1,1 +1,2 @@
 2015-06-29	Initial commit.
+2015-06-30	Version 0.1.0.0	Almost stable
