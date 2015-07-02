@@ -12,6 +12,8 @@ namespace PtxK_S2
         private string ip;
         private List<string> urllist;
 
+        private filelist filelist;
+
         private Thread thread = null;
         private ManualResetEvent stopEvent = null;
         private ManualResetEvent reloadEvent = null;
@@ -53,10 +55,11 @@ namespace PtxK_S2
         /// </summary>
         /// <param name="ip">Url to load from something like "192.168.0.1"</param>
         /// <param name="filelist">filelist as object</param>
-        public Thumbnails(string ip, filelist filelist)
+        public Thumbnails(string ip, ref filelist filelist)
         {
             this.ip = ip;
             this.urllist = new List<string>();
+            this.filelist = filelist;
 
             this.thumbsReceived = 0;
             this.thumbsCount = 0;
@@ -66,7 +69,8 @@ namespace PtxK_S2
             {
                 foreach (string s in d.files)
                 {
-                    urllist.Add(d.name + "/" + s);
+                    string filepath = d.name + "/" + s;
+                    urllist.Add(filepath);
                 }
             }
             this.thumbsCount = urllist.Count;
@@ -157,34 +161,51 @@ namespace PtxK_S2
                     string ext = Path.GetExtension(fn).ToUpper();
                     if (ext == ".JPG")
                     {
-                        //Bitmap bmp = (Bitmap)ks2.GetImage(d.name, fn, "thumb");
-                        
-                        string urlGetFile = "http://{0}/v1/photos/{1}?size={2}";
-                        string url = String.Format(urlGetFile, ip, fn, "thumb");
-
-                        request = (HttpWebRequest)WebRequest.Create(url);
-                        request.ConnectionGroupName = GetHashCode().ToString() + fn;
-
-                        request.Timeout = 3000;
-
-                        using (response = request.GetResponse())
+                        Bitmap bmp;
+                        if (filelist.thumbcache.TryGetValue(fn,out bmp)) //is in cache
                         {
-                            using (stream = response.GetResponseStream())
+                            NewFrame(this, new ThumbnailEventArgs(bmp, fn, thumbsReceived, thumbsCount));
+                        }
+                        else
+                        {
+                            if (string.IsNullOrEmpty(ip)) //Simulation
                             {
-                                if (NewFrame != null)
-                                {
-                                    Bitmap bmp = new Bitmap(stream);
-                                    // notify client
-                                    NewFrame(this, new ThumbnailEventArgs(bmp, fn, thumbsReceived, thumbsCount));
-                                    // release the image
-                                    bmp.Dispose();
-                                    bmp = null;
+                                bmp = new Bitmap(@"simfiles\thumbimg.jpg");
+                                // notify client
+                                Thread.Sleep(20); //Simulate loading of file
+                                filelist.thumbcache.Add(fn, bmp);
+                                NewFrame(this, new ThumbnailEventArgs(bmp, fn, thumbsReceived, thumbsCount));
+                            }
+                            else
+                            {
+                                string urlGetFile = "http://{0}/v1/photos/{1}?size={2}";
+                                string url = String.Format(urlGetFile, ip, fn, "thumb");
 
+                                request = (HttpWebRequest)WebRequest.Create(url);
+                                request.ConnectionGroupName = GetHashCode().ToString() + fn;
+
+                                request.Timeout = 3000;
+
+                                using (response = request.GetResponse())
+                                {
+                                    using (stream = response.GetResponseStream())
+                                    {
+                                        if (NewFrame != null)
+                                        {
+                                            bmp = new Bitmap(stream);
+                                            filelist.thumbcache.Add(fn, bmp);
+                                            // notify client
+                                            NewFrame(this, new ThumbnailEventArgs(bmp, fn, thumbsReceived, thumbsCount));
+                                        }
+                                    }
                                 }
+                                request.Abort();
+                                request = null;
                             }
                         }
-                        request.Abort();
-                        request = null;
+                        // Don't release the image... its in cache!!
+                        //bmp.Dispose();
+                        //bmp = null;
                     }
 
                     this.thumbsReceived++;

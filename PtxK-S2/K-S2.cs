@@ -91,7 +91,17 @@ namespace PtxK_S2
                 }
                 else
                 {
-                    Filelist = cam.JsonDeserialize<filelist>(Content);
+                    if ((Filelist.thumbcache != null)&&(Filelist.thumbcache.Count >0))
+                    {
+                        Dictionary<string, Bitmap> tmp = Filelist.thumbcache;
+                        Filelist = cam.JsonDeserialize<filelist>(Content);
+                        Filelist.thumbcache = tmp;
+                    }
+                    else
+                    {
+                        Filelist = cam.JsonDeserialize<filelist>(Content);
+                        Filelist.thumbcache = new Dictionary<string, Bitmap>();
+                    }
                 }
 
                 ret = true;

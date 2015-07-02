@@ -509,9 +509,9 @@ namespace Pentax_K_S2_Remote
                 tsslMessage.Text = "Thumbnail download started.";
 
                 if(Properties.Settings.Default.SimulateCamera)
-                    thumbnailtread = new Thumbnails("",ks2.Filelist);
+                    thumbnailtread = new Thumbnails("",ref ks2.Filelist);
                 else 
-                    thumbnailtread = new Thumbnails(Properties.Settings.Default.IPAdressCamera,ks2.Filelist);
+                    thumbnailtread = new Thumbnails(Properties.Settings.Default.IPAdressCamera,ref ks2.Filelist);
 
                 thumbnailtread.NewFrame += thumbnailtread_NewFrame;
                 thumbnailtread.Start();
@@ -555,6 +555,7 @@ namespace Pentax_K_S2_Remote
                 tspbThumbnailsLoad.Minimum = 0;
                 tspbThumbnailsLoad.Maximum = tnea.TotalCount;
                 tspbThumbnailsLoad.Value = tnea.Count;
+                tsslMessage.Text = string.Format("... loading thumbnail {0} of {1}", tnea.Count, tnea.TotalCount);
 
                 n.Image = ks2.ResizeImage(tnea.Bitmap, 64, 48);
 

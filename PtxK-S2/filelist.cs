@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Runtime.Serialization;
 
 
@@ -14,6 +15,13 @@ namespace PtxK_S2
 		[DataMember]
 		public List<dirs> dirs { get; set; }
 
+        public Dictionary<string, Bitmap> thumbcache;
+
+        public filelist()
+        {
+            errMsg = "";
+            thumbcache = new Dictionary<string, Bitmap>();
+        }
 
 	}
 
@@ -25,7 +33,14 @@ namespace PtxK_S2
 		[DataMember]
 		public List<string> files { get; set; }
 
+        public dirs()
+        {
+            name = "";
+            files = new List<string>();
+        }
+
 	}
+
 }
 
 //Beispiel:
