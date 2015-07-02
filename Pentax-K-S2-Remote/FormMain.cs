@@ -330,6 +330,11 @@ namespace Pentax_K_S2_Remote
             return i;
         }
 
+        private void clbAF_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idx = (sender as CheckedListBox).SelectedIndex;
+            log.DebugFormat("AF={0}", idx);
+        }
 
         /// <summary>
         /// Get the Camera Parameter
@@ -587,6 +592,11 @@ namespace Pentax_K_S2_Remote
 
         private void SetThumbnail(ThumbnailEventArgs tnea)
         {
+            if (tnea.Count >= tnea.TotalCount)
+            {
+                tspbThumbnailsLoad.Value = 0;
+                tsslMessage.Text = "Thumbnail download done.";
+            }
             //Get Node from dir and filename
             Node n = GetNode(tnea.Filename);
             if(n != null)
@@ -598,11 +608,6 @@ namespace Pentax_K_S2_Remote
 
                 n.Image = ks2.ResizeImage(tnea.Bitmap, 64, 48);
 
-                if (tnea.TotalCount - 1 == tnea.Count)
-                {
-                    tspbThumbnailsLoad.Value = 0;
-                    tsslMessage.Text = "Thumbnail download done.";
-                }
             }
         }
 
@@ -683,7 +688,21 @@ namespace Pentax_K_S2_Remote
                     string filedownloadpath = folderBrowserDialog1.SelectedPath + '\\' + key.Replace('/', '\\');
                     downloadlist[key] = filedownloadpath;
                 }
-                //TODO:Start download...
+                //TODO:Start download in backround with seperate thread...
+                WaitCursor();
+                string url;
+                PtxK_S2.http cam = new PtxK_S2.http();
+                foreach (KeyValuePair<string, string> kvp in downloadlist)
+                {
+                    url = string.Format("http://{0}/v1/photos/{1}", Properties.Settings.Default.IPAdressCamera,kvp.Key);
+                    tsslMessage.Text = "...downloading " + kvp.Key;
+                    if (cam.DownloadRemoteImageFile(url, kvp.Value))
+                    {
+                        tsslMessage.Text = kvp.Key + " downloaded.";
+                    }
+                    
+                }
+                RestoreCursor();
             }
 
             
@@ -695,7 +714,6 @@ namespace Pentax_K_S2_Remote
             Dictionary<string, string> cfl = new Dictionary<string, string>();
             TreeModel tm = (TreeModel)tvaFiles.Model;
 
-            //TODO: interrate through tree;
             foreach (Node dn in tm.Nodes)
             {
                 foreach(Node fn in dn.Nodes)
@@ -729,15 +747,24 @@ namespace Pentax_K_S2_Remote
                         log.Debug(e.Node.Tag.ToString());
                                                 
                         WaitCursor();
-                        
-                        if(e.Button == MouseButtons.Left)
-                            pbPreview.Image = ks2.GetImage(e.Node.Parent.Tag.ToString(), e.Node.Tag.ToString(), "view");
-                        else
-                            pbPreview.Image = ks2.GetImage(e.Node.Parent.Tag.ToString(), e.Node.Tag.ToString(), "full");
+                        try
+                        {
+                            if (e.Button == MouseButtons.Left)
+                                pbPreview.Image = ks2.GetImage(e.Node.Parent.Tag.ToString(), e.Node.Tag.ToString(), "view");
+                            else
+                                pbPreview.Image = ks2.GetImage(e.Node.Parent.Tag.ToString(), e.Node.Tag.ToString(), "full");
 
-                        tstbImagePath.Text = e.Node.Parent.Tag.ToString() + "/" + e.Node.Tag.ToString();
-                        tstbImageSize.Text = pbPreview.Image.Size.Width.ToString() + "x" + pbPreview.Image.Size.Height.ToString();
-                        RestoreCursor();
+                            tstbImagePath.Text = e.Node.Parent.Tag.ToString() + "/" + e.Node.Tag.ToString();
+                            tstbImageSize.Text = pbPreview.Image.Size.Width.ToString() + "x" + pbPreview.Image.Size.Height.ToString();
+                        }
+                        catch (Exception ex)
+                        {
+                            log.ErrorFormat("Resize Image Error: {0}", ex.Message);
+                        }
+                        finally
+                        {
+                            RestoreCursor();
+                        }
                     }
                 }
             }
@@ -759,9 +786,6 @@ namespace Pentax_K_S2_Remote
                     {
                         ((Node)(tna.Tag)).CheckState = ((Node)(e.Node.Tag)).CheckState;
                     }
-                }
-                else
-                {
                 }
             }
         }
@@ -792,6 +816,7 @@ namespace Pentax_K_S2_Remote
                 RestoreCursor();
             }
         }
+        #endregion Filelist
         #endregion Kamera functions
 
         private void tsbDebug_Click(object sender, EventArgs e)
@@ -811,12 +836,6 @@ namespace Pentax_K_S2_Remote
             }
         }
 
-        private void clbAF_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int idx = (sender as CheckedListBox).SelectedIndex;
-            log.DebugFormat("AF={0}", idx);
-        }
-
-        #endregion Filelist
+       
     }
 }

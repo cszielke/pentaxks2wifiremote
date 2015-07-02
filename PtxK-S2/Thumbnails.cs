@@ -157,7 +157,7 @@ namespace PtxK_S2
                     Thread.Sleep(10);
 
                     string fn = urllist[n];
-                    
+                    System.Diagnostics.Debug.WriteLine("Get Tumbnail for: " + fn);
                     string ext = Path.GetExtension(fn).ToUpper();
                     if (ext == ".JPG")
                     {
@@ -211,7 +211,7 @@ namespace PtxK_S2
                     this.thumbsReceived++;
                     n++;
                 }
-
+                NewFrame(this, new ThumbnailEventArgs(null, "", thumbsCount, thumbsCount));
             }
             catch (WebException ex)
             {

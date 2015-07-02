@@ -93,7 +93,10 @@ namespace PtxK_S2
                 response.StatusCode == HttpStatusCode.Redirect) &&
                 response.ContentType.StartsWith("image", StringComparison.OrdinalIgnoreCase))
             {
-
+                if (!Directory.Exists(Path.GetDirectoryName(Path.GetFullPath(fileName))))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(fileName)));
+                }
                 // if the remote file was found, download it
                 using (Stream inputStream = response.GetResponseStream())
                 using (Stream outputStream = File.OpenWrite(fileName))
