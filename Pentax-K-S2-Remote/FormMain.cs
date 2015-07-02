@@ -246,6 +246,7 @@ namespace Pentax_K_S2_Remote
         #endregion Helper
 
         #region Kamera functions
+        #region Camera Parameter
         /// <summary>
         /// Take a Picture
         /// </summary>
@@ -390,7 +391,7 @@ namespace Pentax_K_S2_Remote
         /// <param name="parameter"></param>
         private void UpdateParameter(PtxK_S2.parameter parameter)
         {
-            
+            //TODO: Obsolete, because done already in ks2?
             propsset = true;
             cbAv.DataSource = parameter.avList;
             cbAv.Text = parameter.av;
@@ -466,7 +467,45 @@ namespace Pentax_K_S2_Remote
         {
             cb_SelectedIndexChanged(sender, e);
         }
+        #endregion Camera Parameter
 
+        #region LiveView
+        private void cbLiveView_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((sender as CheckBox).Checked)
+            {
+                mjsource = new PtxK_S2.MJPEGSource();
+                mjsource.VideoSource = string.Format("http://{0}/v1/liveview", Properties.Settings.Default.IPAdressCamera);
+                mjsource.NewFrame += mjsource_NewFrame;
+                mjsource.Start();
+
+            }
+            else
+            {
+                mjsource.Stop();
+                mjsource = null;
+            }
+        }
+
+        void mjsource_NewFrame(object sender, PtxK_S2.CameraEventArgs e)
+        {
+            if (pbLiveView.InvokeRequired)
+            {
+                pbLiveView.Invoke(new MethodInvoker(
+                delegate()
+                {
+                    pbLiveView.Image = ks2.ResizeImage(e.Bitmap, 720, 480);
+                }));
+            }
+            else
+            {
+                pbLiveView.Image = ks2.ResizeImage(e.Bitmap, 720, 480);
+            }
+            //pbLiveView.Image = e.Bitmap;
+        }
+        #endregion LiveView
+
+        #region Filelist
         /// <summary>
         /// Gets the Filelist from K-S2
         /// </summary>
@@ -594,6 +633,82 @@ namespace Pentax_K_S2_Remote
             }
             return n;
         }
+
+        private void tvaFiles_Collapsing(object sender, TreeViewAdvEventArgs e)
+        {
+            if (e.Node.Tag != null)
+            {
+                if (e.Node.Level == 1) //DIR!
+                {
+                    log.DebugFormat("Collapsing {0}", ((Node)(e.Node.Tag)).Text);
+                    ((Node)(e.Node.Tag)).Image = Properties.Resources.folder;
+                }
+
+            }
+        }
+
+        private void tvaFiles_Expanding(object sender, TreeViewAdvEventArgs e)
+        {
+            if (e.Node.Tag != null)
+            {
+                if (e.Node.Level == 1) //DIR!
+                {
+                    log.DebugFormat("Expanding {0}", ((Node)(e.Node.Tag)).Text);
+                    ((Node)(e.Node.Tag)).Image = Properties.Resources.folder_open;
+                }
+            }
+        }
+
+        private void btnDownloadCheckedFiles_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, string> downloadlist = GetCheckedFiles();
+
+            //Do we have files checked?
+            if (downloadlist.Count == 0)
+            {
+                MessageBox.Show("No files where checked", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //Where do we want to store our files
+            folderBrowserDialog1.SelectedPath = Properties.Settings.Default.LastImageSaveDir;
+            DialogResult res = folderBrowserDialog1.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                Properties.Settings.Default.LastImageSaveDir = folderBrowserDialog1.SelectedPath;
+                tsslMessage.Text = string.Format("...downloading {0} files to '{1}'", downloadlist.Count, folderBrowserDialog1.SelectedPath);
+
+                foreach(string key in downloadlist.Keys.ToList())
+                {
+                    string filedownloadpath = folderBrowserDialog1.SelectedPath + '\\' + key.Replace('/', '\\');
+                    downloadlist[key] = filedownloadpath;
+                }
+                //TODO:Start download...
+            }
+
+            
+
+        }
+
+        private Dictionary<string, string> GetCheckedFiles()
+        {
+            Dictionary<string, string> cfl = new Dictionary<string, string>();
+            TreeModel tm = (TreeModel)tvaFiles.Model;
+
+            //TODO: interrate through tree;
+            foreach (Node dn in tm.Nodes)
+            {
+                foreach(Node fn in dn.Nodes)
+                if (fn.IsChecked)
+                {
+                    string filepath = string.Format("{0}/{1}", fn.Parent.Text,fn.Text);
+                    cfl.Add(filepath, "");
+                    log.DebugFormat("Found checked Node {0", filepath);
+                }
+            }
+
+            return cfl;
+        }
         #endregion Thumbnails
 
         /// <summary>
@@ -679,67 +794,6 @@ namespace Pentax_K_S2_Remote
         }
         #endregion Kamera functions
 
-        #region LiveView
-        private void cbLiveView_CheckedChanged(object sender, EventArgs e)
-        {
-            if ((sender as CheckBox).Checked)
-            {
-                mjsource = new PtxK_S2.MJPEGSource();
-                mjsource.VideoSource = string.Format("http://{0}/v1/liveview",Properties.Settings.Default.IPAdressCamera); 
-                mjsource.NewFrame += mjsource_NewFrame;
-                mjsource.Start();
-
-            }
-            else
-            {
-                mjsource.Stop();
-                mjsource = null;
-            }
-        }
-
-        void mjsource_NewFrame(object sender, PtxK_S2.CameraEventArgs e)
-        {
-            if (pbLiveView.InvokeRequired)
-            {
-                pbLiveView.Invoke(new MethodInvoker(
-                delegate()
-                {
-                    pbLiveView.Image = ks2.ResizeImage(e.Bitmap,720,480); 
-                }));
-            }
-            else
-            {
-                pbLiveView.Image = ks2.ResizeImage(e.Bitmap, 720, 480);
-            }
-            //pbLiveView.Image = e.Bitmap;
-        }
-        #endregion LiveView
-
-        private void tvaFiles_Collapsing(object sender, TreeViewAdvEventArgs e)
-        {
-            if (e.Node.Tag != null)
-            {
-                if (e.Node.Level == 1) //DIR!
-                {
-                    log.DebugFormat("Collapsing {0}", ((Node)(e.Node.Tag)).Text);
-                    ((Node)(e.Node.Tag)).Image = Properties.Resources.folder;
-                }
-
-            }
-        }
-
-        private void tvaFiles_Expanding(object sender, TreeViewAdvEventArgs e)
-        {
-            if (e.Node.Tag != null)
-            {
-                if (e.Node.Level == 1) //DIR!
-                {
-                    log.DebugFormat("Expanding {0}", ((Node)(e.Node.Tag)).Text);
-                    ((Node)(e.Node.Tag)).Image = Properties.Resources.folder_open;
-                }
-            }
-        }
-
         private void tsbDebug_Click(object sender, EventArgs e)
         {
             if (splitContainerDebug.Panel2Collapsed)
@@ -762,5 +816,7 @@ namespace Pentax_K_S2_Remote
             int idx = (sender as CheckedListBox).SelectedIndex;
             log.DebugFormat("AF={0}", idx);
         }
+
+        #endregion Filelist
     }
 }

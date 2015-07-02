@@ -123,6 +123,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.btnDownloadCheckedFiles = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -348,7 +350,7 @@
             this.tpCamera.Controls.Add(this.btnShoot);
             this.tpCamera.Location = new System.Drawing.Point(4, 22);
             this.tpCamera.Name = "tpCamera";
-            this.tpCamera.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tpCamera.Padding = new System.Windows.Forms.Padding(3);
             this.tpCamera.Size = new System.Drawing.Size(718, 424);
             this.tpCamera.TabIndex = 0;
             this.tpCamera.Text = "Camera";
@@ -723,7 +725,7 @@
             // 
             this.cbLiveView.AutoSize = true;
             this.cbLiveView.Location = new System.Drawing.Point(480, 48);
-            this.cbLiveView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbLiveView.Margin = new System.Windows.Forms.Padding(2);
             this.cbLiveView.Name = "cbLiveView";
             this.cbLiveView.Size = new System.Drawing.Size(68, 17);
             this.cbLiveView.TabIndex = 44;
@@ -738,7 +740,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbLiveView.BackColor = System.Drawing.Color.LightGray;
             this.pbLiveView.Location = new System.Drawing.Point(211, 75);
-            this.pbLiveView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pbLiveView.Margin = new System.Windows.Forms.Padding(2);
             this.pbLiveView.Name = "pbLiveView";
             this.pbLiveView.Size = new System.Drawing.Size(502, 344);
             this.pbLiveView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -855,7 +857,7 @@
             this.tpPhotos.Controls.Add(this.splitContainerPictureview);
             this.tpPhotos.Location = new System.Drawing.Point(4, 22);
             this.tpPhotos.Name = "tpPhotos";
-            this.tpPhotos.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tpPhotos.Padding = new System.Windows.Forms.Padding(3);
             this.tpPhotos.Size = new System.Drawing.Size(718, 424);
             this.tpPhotos.TabIndex = 1;
             this.tpPhotos.Text = "Photos";
@@ -868,11 +870,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainerPictureview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainerPictureview.Location = new System.Drawing.Point(2, 2);
-            this.splitContainerPictureview.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainerPictureview.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainerPictureview.Name = "splitContainerPictureview";
             // 
             // splitContainerPictureview.Panel1
             // 
+            this.splitContainerPictureview.Panel1.Controls.Add(this.btnDownloadCheckedFiles);
             this.splitContainerPictureview.Panel1.Controls.Add(this.tvaFiles);
             this.splitContainerPictureview.Panel1.Controls.Add(this.btnGetFileList);
             this.splitContainerPictureview.Panel1MinSize = 230;
@@ -899,8 +902,8 @@
             this.tvaFiles.DefaultToolTipProvider = null;
             this.tvaFiles.DragDropMarkColor = System.Drawing.Color.Black;
             this.tvaFiles.LineColor = System.Drawing.SystemColors.ControlDark;
-            this.tvaFiles.Location = new System.Drawing.Point(0, 34);
-            this.tvaFiles.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tvaFiles.Location = new System.Drawing.Point(0, 31);
+            this.tvaFiles.Margin = new System.Windows.Forms.Padding(2);
             this.tvaFiles.Model = null;
             this.tvaFiles.Name = "tvaFiles";
             this.tvaFiles.NodeControls.Add(this.nodeCheckBox1);
@@ -908,7 +911,7 @@
             this.tvaFiles.NodeControls.Add(this.nodeTextBox1);
             this.tvaFiles.RowHeight = 40;
             this.tvaFiles.SelectedNode = null;
-            this.tvaFiles.Size = new System.Drawing.Size(259, 381);
+            this.tvaFiles.Size = new System.Drawing.Size(259, 384);
             this.tvaFiles.TabIndex = 9;
             this.tvaFiles.UseColumns = true;
             this.tvaFiles.NodeMouseClick += new System.EventHandler<Aga.Controls.Tree.TreeNodeAdvMouseEventArgs>(this.tvaFiles_NodeMouseClick);
@@ -1027,9 +1030,9 @@
             this.pbPreview.BackColor = System.Drawing.Color.Gray;
             this.pbPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pbPreview.Location = new System.Drawing.Point(2, 22);
-            this.pbPreview.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pbPreview.Margin = new System.Windows.Forms.Padding(2);
             this.pbPreview.Name = "pbPreview";
-            this.pbPreview.Size = new System.Drawing.Size(442, 393);
+            this.pbPreview.Size = new System.Drawing.Size(443, 393);
             this.pbPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPreview.TabIndex = 6;
             this.pbPreview.TabStop = false;
@@ -1093,6 +1096,16 @@
             // 
             this.saveFileDialog1.DefaultExt = "JPG";
             this.saveFileDialog1.Filter = "JPG-Files|*.jpg|All files|*.*";
+            // 
+            // btnDownloadCheckedFiles
+            // 
+            this.btnDownloadCheckedFiles.Location = new System.Drawing.Point(99, 3);
+            this.btnDownloadCheckedFiles.Name = "btnDownloadCheckedFiles";
+            this.btnDownloadCheckedFiles.Size = new System.Drawing.Size(90, 23);
+            this.btnDownloadCheckedFiles.TabIndex = 10;
+            this.btnDownloadCheckedFiles.Text = "Download files";
+            this.btnDownloadCheckedFiles.UseVisualStyleBackColor = true;
+            this.btnDownloadCheckedFiles.Click += new System.EventHandler(this.btnDownloadCheckedFiles_Click);
             // 
             // FormMain
             // 
@@ -1239,6 +1252,8 @@
         private System.Windows.Forms.RadioButton rbAfOff;
         private System.Windows.Forms.RadioButton rbAfOn;
         private System.Windows.Forms.RadioButton rbAfAuto;
+        private System.Windows.Forms.Button btnDownloadCheckedFiles;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 

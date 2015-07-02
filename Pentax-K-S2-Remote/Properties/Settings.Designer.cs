@@ -106,5 +106,17 @@ namespace Pentax_K_S2_Remote.Properties {
                 this["LastImageSaveDir"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastDownloadDir {
+            get {
+                return ((string)(this["LastDownloadDir"]));
+            }
+            set {
+                this["LastDownloadDir"] = value;
+            }
+        }
     }
 }
