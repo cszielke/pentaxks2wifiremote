@@ -17,7 +17,7 @@ namespace PtxK_S2
         private ManualResetEvent reloadEvent = null;
 
         private int filesReceived;
-        private int filesCount;
+
         // new frame event
         public event DownloadEventHandler DownloadNotify;
 
@@ -40,7 +40,7 @@ namespace PtxK_S2
 
         public int Count
         {
-            get { return filesCount; }
+            get { return filelist.Count; }
         }
 
         public int FilesReceived
@@ -59,7 +59,7 @@ namespace PtxK_S2
             this.filelist = filelist;
 
             this.filesReceived = 0;
-            this.filesCount = this.filelist.Count;
+            
         }
 
         // Start work
@@ -135,8 +135,8 @@ namespace PtxK_S2
                 // loop
                 filesReceived = 0;
                 foreach(KeyValuePair<string,string> kvp in filelist)
-                
                 {
+                    filesReceived++;
                     if ((stopEvent.WaitOne(0, true)) || (reloadEvent.WaitOne(0, true)))
                     {
                         break; //Skip remaining files
@@ -144,27 +144,42 @@ namespace PtxK_S2
 
                     System.Diagnostics.Debug.WriteLine("Get file: " + kvp.Key);
 
-                    if (string.IsNullOrEmpty(url)) //Simulation
+                    if (File.Exists(kvp.Value)) //skip existing files
                     {
-                        // notify client
-                        Thread.Sleep(20); //Simulate loading of file
-                        DownloadNotify(this, new DownloadEventArgs(kvp.Key, filesReceived, filesCount, string.Format("{0} downloaded. ({1}/{2})", kvp.Key, filesReceived, filesCount)));
+                        DownloadNotify(this, new DownloadEventArgs(kvp.Key, filesReceived, filelist.Count,
+                            string.Format("{0} skiped. ({1}/{2})", kvp.Key, filesReceived, filelist.Count))); 
                     }
                     else
                     {
-                        string urlGetFile = string.Format("{0}/{1}",url,kvp.Key);
-                        if (http.DownloadRemoteImageFile(urlGetFile, kvp.Value))
+                        if (string.IsNullOrEmpty(url)) //Simulation
                         {
-                            DownloadNotify(this, new DownloadEventArgs(kvp.Key, filesReceived, filesCount, string.Format("{0} downloaded. ({1}/{2})", kvp.Key, filesReceived, filesCount))); this.filesReceived++;
+                            // notify client
+                            Thread.Sleep(20); //Simulate loading of file
+                            DownloadNotify(this, new DownloadEventArgs(kvp.Key, filesReceived, filelist.Count, 
+                                string.Format("{0} downloaded. ({1}/{2})", kvp.Key, filesReceived, filelist.Count)));
                         }
                         else
                         {
-                            DownloadNotify(this, new DownloadEventArgs(kvp.Key, filesReceived, filesCount, string.Format("Download {0} failed. ({1}/{2})", kvp.Key, filesReceived, filesCount))); this.filesReceived++;
+                            DownloadNotify(this, new DownloadEventArgs(kvp.Key, filesReceived, filelist.Count,
+                                string.Format("Downloading {0}. ({1}/{2})", kvp.Key, filesReceived, filelist.Count))); 
+
+                            string urlGetFile = string.Format("{0}/{1}", url, kvp.Key);
+                            if (http.DownloadRemoteImageFile(urlGetFile, kvp.Value))
+                            {
+                                DownloadNotify(this, new DownloadEventArgs(kvp.Key, filesReceived, filelist.Count, 
+                                    string.Format("{0} downloaded. ({1}/{2})", kvp.Key, filesReceived, filelist.Count))); 
+                            }
+                            else
+                            {
+                                DownloadNotify(this, new DownloadEventArgs(kvp.Key, filesReceived, filelist.Count, 
+                                    string.Format("Download {0} failed. ({1}/{2})", kvp.Key, filesReceived, filelist.Count)));
+                            }
                         }
                     }
-                    filesReceived++;
+                    
                 }
-                DownloadNotify(this, new DownloadEventArgs("", filesReceived, filesCount, "Download files done."));
+                DownloadNotify(this, new DownloadEventArgs("", filesReceived, filelist.Count, 
+                    "Download files done."));
             }
             catch (WebException ex)
             {

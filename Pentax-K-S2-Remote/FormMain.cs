@@ -916,7 +916,7 @@ namespace Pentax_K_S2_Remote
             if (e.Count >= e.TotalCount)
             {
                 tspbImageDownload.Value = 0;
-                downloadthread.Stop();
+                //downloadthread.Stop();
             }
 
             if(!string.IsNullOrEmpty(e.Message)) 
@@ -939,7 +939,7 @@ namespace Pentax_K_S2_Remote
                     {
                         string filepath = string.Format("{0}/{1}", fn.Parent.Text, fn.Text);
                         cfl.Add(filepath, ""); //The Target must be set elsewhere
-                        log.DebugFormat("Found checked Node {0", filepath);
+                        log.DebugFormat("Found checked Node {0}", filepath);
                     }
             }
 

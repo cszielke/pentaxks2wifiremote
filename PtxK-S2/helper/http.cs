@@ -88,8 +88,9 @@ namespace PtxK_S2
             {
                 response = (HttpWebResponse)request.GetResponse();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine("=============: " + ex.Message);
                 return false;
             }
 
@@ -101,7 +102,8 @@ namespace PtxK_S2
             if ((response.StatusCode == HttpStatusCode.OK ||
                 response.StatusCode == HttpStatusCode.Moved ||
                 response.StatusCode == HttpStatusCode.Redirect) &&
-                response.ContentType.StartsWith("image", StringComparison.OrdinalIgnoreCase))
+                ((response.ContentType.StartsWith("image", StringComparison.OrdinalIgnoreCase)||
+                (response.ContentType.StartsWith("video", StringComparison.OrdinalIgnoreCase)))))
             {
                 if (!Directory.Exists(Path.GetDirectoryName(Path.GetFullPath(fileName))))
                 {
