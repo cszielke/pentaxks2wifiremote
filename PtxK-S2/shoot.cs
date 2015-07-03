@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-//http://codezentrale.bplaced.net/dcz/?p=4132
 
 namespace PtxK_S2
 {

@@ -154,8 +154,6 @@ namespace PtxK_S2
                 int n = 0;
                 while( (n < urllist.Count) && (!stopEvent.WaitOne(0, true)) && (!reloadEvent.WaitOne(0, true)))
 				{
-                    Thread.Sleep(10);
-
                     string fn = urllist[n];
                     System.Diagnostics.Debug.WriteLine("Get Tumbnail for: " + fn);
                     string ext = Path.GetExtension(fn).ToUpper();

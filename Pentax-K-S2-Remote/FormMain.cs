@@ -27,7 +27,8 @@ namespace Pentax_K_S2_Remote
         private bool propsset=false;
         private Cursor oldcur;
         private MJPEGSource mjsource;
-        private Thumbnails thumbnailtread;
+        private Thumbnails thumbnailthread;
+        private Download downloadthread;
 
         #region Form functions
         /// <summary>
@@ -117,11 +118,18 @@ namespace Pentax_K_S2_Remote
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Stopping threads
-            if (thumbnailtread != null)
+            if (downloadthread != null)
             {
-                thumbnailtread.Stop();
-                thumbnailtread = null;
+                downloadthread.Stop();
+                downloadthread = null;
             }
+
+            if (thumbnailthread != null)
+            {
+                thumbnailthread.Stop();
+                thumbnailthread = null;
+            }
+
             if (mjsource != null)
             {
                 mjsource.Stop();
@@ -553,12 +561,12 @@ namespace Pentax_K_S2_Remote
                 tsslMessage.Text = "Thumbnail download started.";
 
                 if(Properties.Settings.Default.SimulateCamera)
-                    thumbnailtread = new Thumbnails("",ref ks2.Filelist);
+                    thumbnailthread = new Thumbnails("",ref ks2.Filelist);
                 else 
-                    thumbnailtread = new Thumbnails(Properties.Settings.Default.IPAdressCamera,ref ks2.Filelist);
+                    thumbnailthread = new Thumbnails(Properties.Settings.Default.IPAdressCamera,ref ks2.Filelist);
 
-                thumbnailtread.NewFrame += thumbnailtread_NewFrame;
-                thumbnailtread.Start();
+                thumbnailthread.NewFrame += thumbnailtread_NewFrame;
+                thumbnailthread.Start();
                 
 
                 tbDebug.Text = ks2.Content;
@@ -664,6 +672,9 @@ namespace Pentax_K_S2_Remote
             }
         }
 
+        #endregion Thumbnails
+
+        #region Download files
         private void btnDownloadCheckedFiles_Click(object sender, EventArgs e)
         {
             Dictionary<string, string> downloadlist = GetCheckedFiles();
@@ -683,30 +694,60 @@ namespace Pentax_K_S2_Remote
                 Properties.Settings.Default.LastImageSaveDir = folderBrowserDialog1.SelectedPath;
                 tsslMessage.Text = string.Format("...downloading {0} files to '{1}'", downloadlist.Count, folderBrowserDialog1.SelectedPath);
 
-                foreach(string key in downloadlist.Keys.ToList())
+                foreach (string key in downloadlist.Keys.ToList())
                 {
                     string filedownloadpath = folderBrowserDialog1.SelectedPath + '\\' + key.Replace('/', '\\');
                     downloadlist[key] = filedownloadpath;
                 }
                 //TODO:Start download in backround with seperate thread...
-                WaitCursor();
-                string url;
-                PtxK_S2.http cam = new PtxK_S2.http();
-                foreach (KeyValuePair<string, string> kvp in downloadlist)
+                if (Properties.Settings.Default.SimulateCamera)
                 {
-                    url = string.Format("http://{0}/v1/photos/{1}", Properties.Settings.Default.IPAdressCamera,kvp.Key);
-                    tsslMessage.Text = "...downloading " + kvp.Key;
-                    if (cam.DownloadRemoteImageFile(url, kvp.Value))
-                    {
-                        tsslMessage.Text = kvp.Key + " downloaded.";
-                    }
-                    
+                    downloadthread = new Download(string.Format("", Properties.Settings.Default.IPAdressCamera), downloadlist);
                 }
-                RestoreCursor();
+                else
+                {
+                    downloadthread = new Download(string.Format("http://{0}/v1/photos", Properties.Settings.Default.IPAdressCamera), downloadlist);
+                }
+                downloadthread.DownloadNotify += dlt_DownloadNotify;
+                downloadthread.Start();
+
             }
 
-            
 
+
+        }
+
+        void dlt_DownloadNotify(object sender, DownloadEventArgs e)
+        {
+            if (tvaFiles.InvokeRequired)
+            {
+                tvaFiles.Invoke(new MethodInvoker(
+                delegate()
+                {
+                    SetDownloadInfos(e);
+                }));
+            }
+            else
+            {
+                SetDownloadInfos(e);
+            }
+
+        }
+
+        private void SetDownloadInfos(DownloadEventArgs e)
+        {
+            tspbImageDownload.Maximum = e.TotalCount;
+            tspbImageDownload.Minimum = 0;
+            tspbImageDownload.Value = e.Count;
+
+            if (e.Count >= e.TotalCount)
+            {
+                tspbImageDownload.Value = 0;
+                downloadthread.Stop();
+            }
+
+            if(!string.IsNullOrEmpty(e.Message)) 
+                tsslMessage.Text = e.Message;
         }
 
         private Dictionary<string, string> GetCheckedFiles()
@@ -716,19 +757,19 @@ namespace Pentax_K_S2_Remote
 
             foreach (Node dn in tm.Nodes)
             {
-                foreach(Node fn in dn.Nodes)
-                if (fn.IsChecked)
-                {
-                    string filepath = string.Format("{0}/{1}", fn.Parent.Text,fn.Text);
-                    cfl.Add(filepath, "");
-                    log.DebugFormat("Found checked Node {0", filepath);
-                }
+                foreach (Node fn in dn.Nodes)
+                    if (fn.IsChecked)
+                    {
+                        string filepath = string.Format("{0}/{1}", fn.Parent.Text, fn.Text);
+                        cfl.Add(filepath, "");
+                        log.DebugFormat("Found checked Node {0", filepath);
+                    }
             }
 
             return cfl;
         }
-        #endregion Thumbnails
 
+        #endregion Download files
         /// <summary>
         /// DoubleClick on Treeview Node. Opens the Image in Preview Control
         /// </summary>
@@ -802,8 +843,8 @@ namespace Pentax_K_S2_Remote
                 WaitCursor();
                 string url = string.Format("http://{0}/v1/photos/" + tstbImagePath.Text, Properties.Settings.Default.IPAdressCamera);
                 
-                PtxK_S2.http cam = new PtxK_S2.http();
-                if (cam.DownloadRemoteImageFile(url, saveFileDialog1.FileName))
+                //PtxK_S2.http cam = new PtxK_S2.http();
+                if (http.DownloadRemoteImageFile(url, saveFileDialog1.FileName))
                 {
                     tsslMessage.Text = "Image download done";
                 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -73,8 +71,6 @@ namespace PtxK_S2
             {
                 string url = String.Format(urlGetFilelist, CameraIP);
 
-                PtxK_S2.http cam = new PtxK_S2.http();
-
                 if (simCamera)
                 {
                     Content = File.ReadAllText(@"simfiles\filelist.txt");
@@ -82,7 +78,7 @@ namespace PtxK_S2
                 }
                 else
                 {
-                    cam.HttpSend(url, "GET", "", out Content, out ErrCode);
+                    http.HttpSend(url, "GET", "", out Content, out ErrCode);
                 }
 
                 if (!String.IsNullOrEmpty(ErrCode))
@@ -94,12 +90,12 @@ namespace PtxK_S2
                     if ((Filelist.thumbcache != null)&&(Filelist.thumbcache.Count >0))
                     {
                         Dictionary<string, Bitmap> tmp = Filelist.thumbcache;
-                        Filelist = cam.JsonDeserialize<filelist>(Content);
+                        Filelist = http.JsonDeserialize<filelist>(Content);
                         Filelist.thumbcache = tmp;
                     }
                     else
                     {
-                        Filelist = cam.JsonDeserialize<filelist>(Content);
+                        Filelist = http.JsonDeserialize<filelist>(Content);
                         Filelist.thumbcache = new Dictionary<string, Bitmap>();
                     }
                 }
@@ -132,8 +128,6 @@ namespace PtxK_S2
             {
                 string url = String.Format(urlGetParam, CameraIP);
 
-                PtxK_S2.http cam = new PtxK_S2.http();
-
                 if (simCamera)
                 {
                     Content = File.ReadAllText(@"simfiles\parameter.txt");
@@ -141,7 +135,7 @@ namespace PtxK_S2
                 }
                 else
                 {
-                    cam.HttpSend(url, "GET", "", out Content, out ErrCode);
+                    http.HttpSend(url, "GET", "", out Content, out ErrCode);
                 }
 
                 if (!String.IsNullOrEmpty(ErrCode))
@@ -150,7 +144,7 @@ namespace PtxK_S2
                 }
                 else
                 {
-                    Parameter = cam.JsonDeserialize<parameter>(Content);
+                    Parameter = http.JsonDeserialize<parameter>(Content);
                 }
 
                 ret = true;
@@ -183,8 +177,6 @@ namespace PtxK_S2
                 string url = String.Format(urlSetParam, CameraIP);
                 string postContent = param;
 
-                PtxK_S2.http cam = new PtxK_S2.http();
-
                 if (simCamera)
                 {
                     Content = File.ReadAllText(@"simfiles\setparam.txt");
@@ -192,7 +184,7 @@ namespace PtxK_S2
                 }
                 else
                 {
-                    cam.HttpSend(url, "PUT", postContent, out Content, out ErrCode);
+                    http.HttpSend(url, "PUT", postContent, out Content, out ErrCode);
                 }
 
                 if (!String.IsNullOrEmpty(ErrCode))
@@ -201,7 +193,7 @@ namespace PtxK_S2
                 }
                 else
                 {
-                    parameter pm = cam.JsonDeserialize<parameter>(Content);
+                    parameter pm = http.JsonDeserialize<parameter>(Content);
                     SetParameterIfNotNull(pm);
                 }
 
@@ -263,8 +255,6 @@ namespace PtxK_S2
                 string url = String.Format(urlShoot, CameraIP);
                 string postContent = af;
 
-                PtxK_S2.http cam = new PtxK_S2.http();
-
                 if (simCamera)
                 {
                     Content = File.ReadAllText(@"simfiles\shoot.txt");
@@ -272,7 +262,7 @@ namespace PtxK_S2
                 }
                 else
                 {
-                    cam.HttpSend(url, "POST", postContent, out Content, out ErrCode);
+                    http.HttpSend(url, "POST", postContent, out Content, out ErrCode);
                 }
 
                 if (!String.IsNullOrEmpty(ErrCode))
@@ -361,8 +351,6 @@ namespace PtxK_S2
                 string url;
                 url = String.Format(urlGetFileInfo, CameraIP, filepath);
 
-                PtxK_S2.http cam = new PtxK_S2.http();
-
                 if (simCamera)
                 {
                     Content = File.ReadAllText(@"simfiles\info.txt");
@@ -370,7 +358,7 @@ namespace PtxK_S2
                 }
                 else
                 {
-                    cam.HttpSend(url, "GET", "", out Content, out ErrCode);
+                    http.HttpSend(url, "GET", "", out Content, out ErrCode);
                 }
 
                 if (!String.IsNullOrEmpty(ErrCode))
@@ -379,7 +367,7 @@ namespace PtxK_S2
                 }
                 else
                 {
-                    PhotoInfo = cam.JsonDeserialize<photoinfo>(Content);
+                    PhotoInfo = http.JsonDeserialize<photoinfo>(Content);
                 }
 
                 ret = true;

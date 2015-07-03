@@ -10,13 +10,13 @@ using System.Runtime.Serialization.Json;
 
 namespace PtxK_S2
 {
-    public class http
+    public static class http
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public bool useDefaultProxy = false;
+        public static bool useDefaultProxy = false;
 
-        public void HttpSend(string strUrl, string Methode, string PostContent, out string strContent, out string strErrCode)
+        public static void HttpSend(string strUrl, string Methode, string PostContent, out string strContent, out string strErrCode)
         {
             strErrCode = "";
             StringBuilder strBuildContent = new StringBuilder();
@@ -40,7 +40,7 @@ namespace PtxK_S2
                 WebReq.ContentLength = byteArray.Length;
                 WebReq.ContentType = "text/xml";
                 WebReq.Timeout = 3000;
-                WebReq.ConnectionGroupName = GetHashCode().ToString()+strUrl;
+                WebReq.ConnectionGroupName = "HttpSend "+strUrl;
 
                 //Bei POST und PUT Request Content setzen
                 if ((Methode.ToUpper() == "POST")||(Methode.ToUpper() == "PUT"))
@@ -68,10 +68,10 @@ namespace PtxK_S2
             strContent = strBuildContent.ToString();
         }
 
-        public bool DownloadRemoteImageFile(string uri, string fileName)
+        public static bool DownloadRemoteImageFile(string uri, string fileName)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.ConnectionGroupName = GetHashCode().ToString() + uri;
+            request.ConnectionGroupName = "DownloadRemoteImageFile " + uri;
             request.Timeout = 3000;
             HttpWebResponse response;
             try
@@ -114,8 +114,8 @@ namespace PtxK_S2
             else
                 return false;
         }
-        
-        public String GetStringInBetween(String strSource, ref int StartPos,
+
+        public static String GetStringInBetween(String strSource, ref int StartPos,
             String strBegin, String strEnd,
             bool includeBegin, bool includeEnd)
         {
@@ -144,7 +144,7 @@ namespace PtxK_S2
             return ret;
         }
 
-        public String ReplaceStringInBetween(String strSource, String strBegin, String strEnd, String NewStr)
+        public static String ReplaceStringInBetween(String strSource, String strBegin, String strEnd, String NewStr)
         {
             int pos = 0;
             String tmp = "dummy";
@@ -163,13 +163,13 @@ namespace PtxK_S2
             return strSource;
         }
 
-        public String StripHtmlTags(String strContent)
+        public static String StripHtmlTags(String strContent)
         {
             Regex rexStripHtml = new Regex("<([^!>]([^>]|\n)*)>", RegexOptions.IgnoreCase);
             return rexStripHtml.Replace(strContent, "").Replace("&nbsp;", "");
         }
 
-        public String StripWhiteSpaces(String strContent)
+        public static String StripWhiteSpaces(String strContent)
         {
             //Regex rexStripHtml = new Regex("<(.|\n)+?>", RegexOptions.IgnoreCase);
             Regex rexStripWhSpace = new Regex(" * ", RegexOptions.IgnoreCase);
@@ -179,7 +179,7 @@ namespace PtxK_S2
         /// <summary>
         /// JSON Serialization
         /// </summary>
-        public string JsonSerializer<T>(T t)
+        public static string JsonSerializer<T>(T t)
         {
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));
             MemoryStream ms = new MemoryStream();
@@ -192,7 +192,7 @@ namespace PtxK_S2
         /// <summary>
         /// JSON Deserialization
         /// </summary>
-        public T JsonDeserialize<T>(string jsonString)
+        public static T JsonDeserialize<T>(string jsonString)
         {
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));
             MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));

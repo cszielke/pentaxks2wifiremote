@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Download.cs" />
+    <Compile Include="DownloadEvent.cs" />
     <Compile Include="mjpeg\ByteArrayUtils.cs" />
     <Compile Include="mjpeg\CameraEvent.cs" />
     <Compile Include="mjpeg\MJPEGSource.cs" />
