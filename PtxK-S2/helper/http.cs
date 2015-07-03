@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Net;
 using System.IO;
-using System.Text.RegularExpressions;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 
 namespace PtxK_S2
@@ -16,6 +12,14 @@ namespace PtxK_S2
 
         public static bool useDefaultProxy = false;
 
+        /// <summary>
+        /// Send a Request to a webserver
+        /// </summary>
+        /// <param name="strUrl">URL</param>
+        /// <param name="Methode">GET, POST, PUT,DELETE, etc...</param>
+        /// <param name="PostContent">The Content, that will be sent to the webserver</param>
+        /// <param name="strContent">The Content, that the webserver will return</param>
+        /// <param name="strErrCode">The Error, that the webserver will return (or empty for no error)</param>
         public static void HttpSend(string strUrl, string Methode, string PostContent, out string strContent, out string strErrCode)
         {
             strErrCode = "";
@@ -68,6 +72,12 @@ namespace PtxK_S2
             strContent = strBuildContent.ToString();
         }
 
+        /// <summary>
+        /// Download a image file and save it on disk
+        /// </summary>
+        /// <param name="uri">Source URI</param>
+        /// <param name="fileName">Filename to save to</param>
+        /// <returns></returns>
         public static bool DownloadRemoteImageFile(string uri, string fileName)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
@@ -113,67 +123,6 @@ namespace PtxK_S2
             }
             else
                 return false;
-        }
-
-        public static String GetStringInBetween(String strSource, ref int StartPos,
-            String strBegin, String strEnd,
-            bool includeBegin, bool includeEnd)
-        {
-
-            String ret = "";
-            int iIndexOfBegin = strSource.IndexOf(strBegin, StartPos);
-
-            if (iIndexOfBegin != -1)
-            {
-                // include the Begin string if desired
-                StartPos = iIndexOfBegin;
-                if (includeBegin)
-                    iIndexOfBegin -= strBegin.Length;
-                strSource = strSource.Substring(iIndexOfBegin
-                    + strBegin.Length);
-                int iEnd = strSource.IndexOf(strEnd);
-                if (iEnd != -1)
-                {
-                    // include the End string if desired
-                    StartPos += iEnd + strEnd.Length; //remember last Pos
-                    if (includeEnd) iEnd += strEnd.Length;
-                    ret = strSource.Substring(0, iEnd);
-                }
-            }
-
-            return ret;
-        }
-
-        public static String ReplaceStringInBetween(String strSource, String strBegin, String strEnd, String NewStr)
-        {
-            int pos = 0;
-            String tmp = "dummy";
-            while (tmp != "")
-            {
-                tmp = GetStringInBetween(strSource, ref pos,
-                            strBegin, strEnd, true, true);
-                if (tmp != "")
-                {
-                    strSource = strSource.Replace(tmp, NewStr);
-                    pos -= tmp.Length;
-                    pos += NewStr.Length;
-                }
-            }
-
-            return strSource;
-        }
-
-        public static String StripHtmlTags(String strContent)
-        {
-            Regex rexStripHtml = new Regex("<([^!>]([^>]|\n)*)>", RegexOptions.IgnoreCase);
-            return rexStripHtml.Replace(strContent, "").Replace("&nbsp;", "");
-        }
-
-        public static String StripWhiteSpaces(String strContent)
-        {
-            //Regex rexStripHtml = new Regex("<(.|\n)+?>", RegexOptions.IgnoreCase);
-            Regex rexStripWhSpace = new Regex(" * ", RegexOptions.IgnoreCase);
-            return rexStripWhSpace.Replace(strContent, " ");
         }
 
         /// <summary>

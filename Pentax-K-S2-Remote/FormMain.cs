@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using log4net;
 using log4net.Core;
 using Aga.Controls.Tree;
 using Aga.Controls.Tree.NodeControls;
-using System.Net;
 using PtxK_S2;
 using System.Threading;
 
@@ -226,6 +220,25 @@ namespace Pentax_K_S2_Remote
             FormAbout fa = new FormAbout();
             fa.ShowDialog();
         }
+
+        private void tsbDebug_Click(object sender, EventArgs e)
+        {
+            if (splitContainerDebug.Panel2Collapsed)
+            {
+                splitContainerDebug.Panel2Collapsed = false;
+                tsbDebug.Image = Properties.Resources.lightningbug_on;
+                tsslMessage.Text = "Debug window visible";
+            }
+            else
+            {
+                splitContainerDebug.Panel2Collapsed = true;
+                tsbDebug.Image = Properties.Resources.lightningbug_off;
+                tsslMessage.Text = "Debug windows hidden";
+
+            }
+        }
+
+
         #endregion MenuItems
 
         #region Helper
@@ -254,9 +267,9 @@ namespace Pentax_K_S2_Remote
         #endregion Helper
 
         #region Kamera functions
-        #region Camera Parameter
+        #region Shoot
         /// <summary>
-        /// Take a Picture
+        /// Button for taking a Picture
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -316,6 +329,11 @@ namespace Pentax_K_S2_Remote
             RestoreCursor();
         }
 
+        /// <summary>
+        /// Get the Index of the checked radio button for Autofocus Settings
+        /// </summary>
+        /// <param name="c">Control for the Autofocus Settings </param>
+        /// <returns></returns>
         private int getCheckedRadioButton(Control c)
         {
             int i;
@@ -338,14 +356,21 @@ namespace Pentax_K_S2_Remote
             return i;
         }
 
+        /// <summary>
+        /// Event for Autofocus settings changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void clbAF_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idx = (sender as CheckedListBox).SelectedIndex;
             log.DebugFormat("AF={0}", idx);
         }
+        #endregion Shoot
 
+        #region Camera Parameter
         /// <summary>
-        /// Get the Camera Parameter
+        /// Get/Refresh the Camera Parameter
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -368,6 +393,16 @@ namespace Pentax_K_S2_Remote
             }
 
             RestoreCursor();
+        }
+
+        /// <summary>
+        /// Send the K-S2 green Button. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGreen_Click(object sender, EventArgs e)
+        {
+            cb_SelectedIndexChanged(sender, e);
         }
 
         /// <summary>
@@ -447,14 +482,14 @@ namespace Pentax_K_S2_Remote
         }
 
         /// <summary>
-        /// Determine wich parameter has changed.
+        /// Determine witch parameter has changed.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <returns>parameter string</returns>
         private string GetChangedParam(object sender, EventArgs e)
         {
-            string s = "";
+            string s = ""; //Default is "No Parameter" witch is the Green Button
             if (sender == cbAv) s = "av=" + cbAv.Text;
             else if (sender == cbAv) s = "av=" + cbAv.Text;
             else if (sender == cbTv) s = "tv=" + cbTv.Text;
@@ -470,19 +505,14 @@ namespace Pentax_K_S2_Remote
             else if (sender == cbFilter) s = "filter=" + cbFilter.Text; //Don't work for dfl_extractColor, dfl_replaceColor
             return s;
         }
-
-        /// <summary>
-        /// Send the K-S2 green Button.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnGreen_Click(object sender, EventArgs e)
-        {
-            cb_SelectedIndexChanged(sender, e);
-        }
         #endregion Camera Parameter
 
         #region LiveView
+        /// <summary>
+        /// Starting/Stopping Liveview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbLiveView_CheckedChanged(object sender, EventArgs e)
         {
             if ((sender as CheckBox).Checked)
@@ -500,6 +530,11 @@ namespace Pentax_K_S2_Remote
             }
         }
 
+        /// <summary>
+        /// Event for Displaying a new Liveview picture
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void mjsource_NewFrame(object sender, PtxK_S2.CameraEventArgs e)
         {
             if (pbLiveView.InvokeRequired)
@@ -513,14 +548,14 @@ namespace Pentax_K_S2_Remote
             else
             {
                 pbLiveView.Image = ks2.ResizeImage(e.Bitmap, 720, 480);
+                //pbLiveView.Image = e.Bitmap; //Did'nt work ?!?! No glue why!
             }
-            //pbLiveView.Image = e.Bitmap;
         }
         #endregion LiveView
 
         #region Filelist
         /// <summary>
-        /// Gets the Filelist from K-S2
+        /// Gets the Filelist from K-S2 and starts feching thumbnails
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -531,8 +566,16 @@ namespace Pentax_K_S2_Remote
 
             WaitCursor();
 
-            if (ks2.GetFilelist())
+            if (!ks2.GetFilelist())
             {
+                tbDebug.Text = ks2.ErrCode;
+                tsslMessage.Text = "Get file list failed";
+            }
+            else
+            {
+                tsslMessage.Text = "Get file list success";
+
+                //Generating the Tree
                 TreeModel tmodel = new TreeModel();
                 tvaFiles.Model = tmodel;
 
@@ -540,7 +583,7 @@ namespace Pentax_K_S2_Remote
                 Color backColor = folderimg.GetPixel(1, 1);
                 folderimg.MakeTransparent(backColor);
 
-                foreach (PtxK_S2.dirs dirs in ks2.Filelist.dirs)
+                foreach (dirs dirs in ks2.Filelist.dirs)
                 {
                     Node dirnode = new Node();
                     dirnode.Text = dirs.name;
@@ -554,35 +597,41 @@ namespace Pentax_K_S2_Remote
                         Node file = new Node(fn);
                         file.Image = Properties.Resources.image_loading;
                         dirnode.Nodes.Add(file);
-
                     }
                 }
 
-                tsslMessage.Text = "Thumbnail download started.";
-
-                if(Properties.Settings.Default.SimulateCamera)
-                    thumbnailthread = new Thumbnails("",ref ks2.Filelist);
-                else 
-                    thumbnailthread = new Thumbnails(Properties.Settings.Default.IPAdressCamera,ref ks2.Filelist);
-
-                thumbnailthread.NewFrame += thumbnailtread_NewFrame;
-                thumbnailthread.Start();
-                
-
-                tbDebug.Text = ks2.Content;
-                tsslMessage.Text = "Get file list success";
-            }
-            else
-            {
-                tbDebug.Text = ks2.ErrCode;
-                tsslMessage.Text = "Get file list failed";
+                startingThumbnailDownload();
             }
 
             RestoreCursor();
         }
 
         #region Thumbnails
-        void thumbnailtread_NewFrame(object sender, ThumbnailEventArgs e)
+        /// <summary>
+        /// Starts the thumbnail download thread
+        /// </summary>
+        private void startingThumbnailDownload()
+        {
+            //Starting Thumbnail download
+            tsslMessage.Text = "Thumbnail download started.";
+
+            if (Properties.Settings.Default.SimulateCamera)
+                thumbnailthread = new Thumbnails("", ref ks2.Filelist);
+            else
+                thumbnailthread = new Thumbnails(Properties.Settings.Default.IPAdressCamera, ref ks2.Filelist);
+
+            thumbnailthread.NewFrame += thumbnailtread_NewFrame;
+            thumbnailthread.Start();
+
+            tbDebug.Text = ks2.Content;
+        }
+
+        /// <summary>
+        /// Notify from thumbnailthread. Next Thumbnail is ready
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void thumbnailtread_NewFrame(object sender, ThumbnailEventArgs e)
         {
             if (tvaFiles.InvokeRequired)
             {
@@ -598,6 +647,10 @@ namespace Pentax_K_S2_Remote
             }
         }
 
+        /// <summary>
+        /// Set the Thumbnail in Treeview
+        /// </summary>
+        /// <param name="tnea"></param>
         private void SetThumbnail(ThumbnailEventArgs tnea)
         {
             if (tnea.Count >= tnea.TotalCount)
@@ -619,13 +672,18 @@ namespace Pentax_K_S2_Remote
             }
         }
 
+        /// <summary>
+        /// Returns the Node, witch represents the filename
+        /// </summary>
+        /// <param name="filename">Filename (something like "100_1406/IMGP1377.JPG")</param>
+        /// <returns>The matching Node or null, if not found</returns>
         private Node GetNode(string filename)
         {
             Node n = null;
             TreeModel tm = (TreeModel)tvaFiles.Model;
             
             string[] filepath = filename.Split(new char[]{'/','\\'});
-            if (filepath.Length < 2) return n;
+            if (filepath.Length < 2) return n; //Error! return null
 
             //log.DebugFormat("GetNode {0}/{1}",dir,filename);
             foreach (Node dn in tm.Nodes)
@@ -647,6 +705,11 @@ namespace Pentax_K_S2_Remote
             return n;
         }
 
+        /// <summary>
+        /// Changing the Folder Image to "closed folder"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tvaFiles_Collapsing(object sender, TreeViewAdvEventArgs e)
         {
             if (e.Node.Tag != null)
@@ -660,6 +723,11 @@ namespace Pentax_K_S2_Remote
             }
         }
 
+        /// <summary>
+        /// Changing the Folder Image to "open folder"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tvaFiles_Expanding(object sender, TreeViewAdvEventArgs e)
         {
             if (e.Node.Tag != null)
@@ -672,9 +740,109 @@ namespace Pentax_K_S2_Remote
             }
         }
 
+        /// <summary>
+        /// Click on Treeview Node for Checkbox toggle
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tvaFiles_NodeMouseClick(object sender, TreeNodeAdvMouseEventArgs e)
+        {
+            if (e.Control is NodeCheckBox)
+            {
+                log.Debug("Checkbox click: " + e.Node.Tag.ToString());
+                if (e.Node.Parent.Tag == null) //DIR
+                {
+                    foreach (TreeNodeAdv tna in e.Node.Children)
+                    {
+                        ((Node)(tna.Tag)).CheckState = ((Node)(e.Node.Tag)).CheckState;
+                    }
+                }
+            }
+        }
         #endregion Thumbnails
 
+        #region Preview
+        /// <summary>
+        /// DoubleClick on Treeview Node. Opens the Image in Preview Control
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tvaFiles_NodeMouseDoubleClick(object sender, TreeNodeAdvMouseEventArgs e)
+        {
+            if (e.Control.Parent != null)
+            {
+                if ((e.Control is NodeTextBox) || (e.Control is NodeIcon))
+                {
+                    if (e.Node.Parent.Tag != null)
+                    {
+
+                        log.Debug(e.Node.Parent.Tag.ToString());
+                        log.Debug(e.Node.Tag.ToString());
+
+                        WaitCursor();
+                        try
+                        {
+                            //Preview or Full size?
+                            if (e.Button == MouseButtons.Left)
+                                pbPreview.Image = ks2.GetImage(e.Node.Parent.Tag.ToString(), e.Node.Tag.ToString(), "view");
+                            else
+                                pbPreview.Image = ks2.GetImage(e.Node.Parent.Tag.ToString(), e.Node.Tag.ToString(), "full");
+
+                            tstbImagePath.Text = e.Node.Parent.Tag.ToString() + "/" + e.Node.Tag.ToString();
+                            tstbImageSize.Text = pbPreview.Image.Size.Width.ToString() + "x" + pbPreview.Image.Size.Height.ToString();
+                        }
+                        catch (Exception ex)
+                        {
+                            log.ErrorFormat("Resize Image Error: {0}", ex.Message);
+                        }
+                        finally
+                        {
+                            RestoreCursor();
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Save the previewing image in full size on disk;
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbImageSaveAs_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.InitialDirectory = Properties.Settings.Default.LastImageSaveDir;
+            saveFileDialog1.FileName = Path.GetFileName(tstbImagePath.Text);
+
+            DialogResult res = saveFileDialog1.ShowDialog();
+
+            if (res == DialogResult.OK)
+            {
+                WaitCursor();
+                string url = string.Format("http://{0}/v1/photos/" + tstbImagePath.Text, Properties.Settings.Default.IPAdressCamera);
+
+                //PtxK_S2.http cam = new PtxK_S2.http();
+                if (http.DownloadRemoteImageFile(url, saveFileDialog1.FileName))
+                {
+                    tsslMessage.Text = "Image download done";
+                }
+                else
+                {
+                    tsslMessage.Text = "Image download fail";
+                }
+
+                Properties.Settings.Default.LastImageSaveDir = Path.GetFullPath(saveFileDialog1.FileName);
+                RestoreCursor();
+            }
+        }
+        #endregion Preview
+
         #region Download files
+        /// <summary>
+        /// Download all files, that were checked in treeview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDownloadCheckedFiles_Click(object sender, EventArgs e)
         {
             Dictionary<string, string> downloadlist = GetCheckedFiles();
@@ -699,7 +867,7 @@ namespace Pentax_K_S2_Remote
                     string filedownloadpath = folderBrowserDialog1.SelectedPath + '\\' + key.Replace('/', '\\');
                     downloadlist[key] = filedownloadpath;
                 }
-                //TODO:Start download in backround with seperate thread...
+                
                 if (Properties.Settings.Default.SimulateCamera)
                 {
                     downloadthread = new Download(string.Format("", Properties.Settings.Default.IPAdressCamera), downloadlist);
@@ -708,16 +876,17 @@ namespace Pentax_K_S2_Remote
                 {
                     downloadthread = new Download(string.Format("http://{0}/v1/photos", Properties.Settings.Default.IPAdressCamera), downloadlist);
                 }
-                downloadthread.DownloadNotify += dlt_DownloadNotify;
+                downloadthread.DownloadNotify += downloadthread_DownloadNotify;
                 downloadthread.Start();
-
             }
-
-
-
         }
 
-        void dlt_DownloadNotify(object sender, DownloadEventArgs e)
+        /// <summary>
+        /// Notifyer from downloadthread
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void downloadthread_DownloadNotify(object sender, DownloadEventArgs e)
         {
             if (tvaFiles.InvokeRequired)
             {
@@ -734,6 +903,10 @@ namespace Pentax_K_S2_Remote
 
         }
 
+        /// <summary>
+        /// Display infos about the file download
+        /// </summary>
+        /// <param name="e"></param>
         private void SetDownloadInfos(DownloadEventArgs e)
         {
             tspbImageDownload.Maximum = e.TotalCount;
@@ -750,6 +923,10 @@ namespace Pentax_K_S2_Remote
                 tsslMessage.Text = e.Message;
         }
 
+        /// <summary>
+        /// Get all checked files from treeview
+        /// </summary>
+        /// <returns>A dictionary with all checked files. The Target must be set elsewhere</returns>
         private Dictionary<string, string> GetCheckedFiles()
         {
             Dictionary<string, string> cfl = new Dictionary<string, string>();
@@ -761,7 +938,7 @@ namespace Pentax_K_S2_Remote
                     if (fn.IsChecked)
                     {
                         string filepath = string.Format("{0}/{1}", fn.Parent.Text, fn.Text);
-                        cfl.Add(filepath, "");
+                        cfl.Add(filepath, ""); //The Target must be set elsewhere
                         log.DebugFormat("Found checked Node {0", filepath);
                     }
             }
@@ -770,113 +947,7 @@ namespace Pentax_K_S2_Remote
         }
 
         #endregion Download files
-        /// <summary>
-        /// DoubleClick on Treeview Node. Opens the Image in Preview Control
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tvaFiles_NodeMouseDoubleClick(object sender, TreeNodeAdvMouseEventArgs e)
-        {
-            if (e.Control.Parent != null)
-            {
-                if ((e.Control is NodeTextBox) || (e.Control is NodeIcon))
-                {
-                    if (e.Node.Parent.Tag != null)
-                    {
-                        
-                        log.Debug(e.Node.Parent.Tag.ToString());
-                        log.Debug(e.Node.Tag.ToString());
-                                                
-                        WaitCursor();
-                        try
-                        {
-                            if (e.Button == MouseButtons.Left)
-                                pbPreview.Image = ks2.GetImage(e.Node.Parent.Tag.ToString(), e.Node.Tag.ToString(), "view");
-                            else
-                                pbPreview.Image = ks2.GetImage(e.Node.Parent.Tag.ToString(), e.Node.Tag.ToString(), "full");
-
-                            tstbImagePath.Text = e.Node.Parent.Tag.ToString() + "/" + e.Node.Tag.ToString();
-                            tstbImageSize.Text = pbPreview.Image.Size.Width.ToString() + "x" + pbPreview.Image.Size.Height.ToString();
-                        }
-                        catch (Exception ex)
-                        {
-                            log.ErrorFormat("Resize Image Error: {0}", ex.Message);
-                        }
-                        finally
-                        {
-                            RestoreCursor();
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Click on Treeview Node for Checkbox toggle
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tvaFiles_NodeMouseClick(object sender, TreeNodeAdvMouseEventArgs e)
-        {
-            if (e.Control is NodeCheckBox)
-            {
-                log.Debug("Checkbox click: "+e.Node.Tag.ToString());
-                if (e.Node.Parent.Tag == null) //DIR
-                {
-                    foreach (TreeNodeAdv tna in e.Node.Children)
-                    {
-                        ((Node)(tna.Tag)).CheckState = ((Node)(e.Node.Tag)).CheckState;
-                    }
-                }
-            }
-        }
-
-        private void tsbImageSaveAs_Click(object sender, EventArgs e)
-        {
-            saveFileDialog1.InitialDirectory = Properties.Settings.Default.LastImageSaveDir;
-            saveFileDialog1.FileName = Path.GetFileName(tstbImagePath.Text);
-
-            DialogResult res = saveFileDialog1.ShowDialog();
-            
-            if (res == DialogResult.OK)
-            {
-                WaitCursor();
-                string url = string.Format("http://{0}/v1/photos/" + tstbImagePath.Text, Properties.Settings.Default.IPAdressCamera);
-                
-                //PtxK_S2.http cam = new PtxK_S2.http();
-                if (http.DownloadRemoteImageFile(url, saveFileDialog1.FileName))
-                {
-                    tsslMessage.Text = "Image download done";
-                }
-                else
-                {
-                    tsslMessage.Text = "Image download fail";
-                }
-
-                Properties.Settings.Default.LastImageSaveDir = Path.GetFullPath(saveFileDialog1.FileName);
-                RestoreCursor();
-            }
-        }
         #endregion Filelist
         #endregion Kamera functions
-
-        private void tsbDebug_Click(object sender, EventArgs e)
-        {
-            if (splitContainerDebug.Panel2Collapsed)
-            {
-                splitContainerDebug.Panel2Collapsed = false;
-                tsbDebug.Image = Properties.Resources.lightningbug_on;
-                tsslMessage.Text = "Debug window visible";
-            }
-            else
-            {
-                splitContainerDebug.Panel2Collapsed = true;
-                tsbDebug.Image = Properties.Resources.lightningbug_off;
-                tsslMessage.Text = "Debug windows hidden";
-
-            }
-        }
-
-       
     }
 }

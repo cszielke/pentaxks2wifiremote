@@ -23,13 +23,14 @@ namespace PtxK_S2
 
         private bool simCamera;
 
-        const string urlShoot       = "http://{0}/v1/camera/shoot"; //ip
-        const string urlGetParam    = "http://{0}/v1/props"; //ip
-        const string urlSetParam    = "http://{0}/v1/params/camera"; //ip
-        const string urlGetFilelist = "http://{0}/v1/photos"; //ip
-        const string urlGetFile     = "http://{0}/v1/photos/{1}?size={2}"; //ip,dir+/+filename,resolution thumb,view or full
-        const string urlGetFileInfo = "http://{0}/v1/photos/{1}/info"; //ip,dir+/+filename
-        const string urlLiveView = "http://{0}/v1/liveview";//ip
+        //The Camera URLs
+        public const string urlShoot       = "http://{0}/v1/camera/shoot"; //ip
+        public const string urlGetParam = "http://{0}/v1/props"; //ip
+        public const string urlSetParam = "http://{0}/v1/params/camera"; //ip
+        public const string urlGetFilelist = "http://{0}/v1/photos"; //ip
+        public const string urlGetFile = "http://{0}/v1/photos/{1}?size={2}"; //ip,dir+/+filename,resolution thumb,view or full
+        public const string urlGetFileInfo = "http://{0}/v1/photos/{1}/info"; //ip,dir+/+filename
+        public const string urlLiveView = "http://{0}/v1/liveview";//ip
 
         #region constructor
         public K_S2()
@@ -385,6 +386,7 @@ namespace PtxK_S2
             return ret;
         }
 
+        #region Helper
         /// <summary>
         /// Resize the image to the specified width and height.
         /// </summary>
@@ -419,7 +421,10 @@ namespace PtxK_S2
             return destImage;
         }
 
-        #region Helper
+        /// <summary>
+        /// Update the parameter var with param, if not null
+        /// </summary>
+        /// <param name="param">the new parameter var</param>
         private void SetParameterIfNotNull(parameter param)
         {
             //returncodes

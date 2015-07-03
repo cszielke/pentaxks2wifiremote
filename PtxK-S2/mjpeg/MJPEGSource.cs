@@ -324,19 +324,19 @@ namespace PtxK_S2
 				}
 				catch (WebException ex)
 				{
-					System.Diagnostics.Debug.WriteLine("=============: " + ex.Message);
+					System.Diagnostics.Debug.WriteLine("Error: " + ex.Message);
 					// wait for a while before the next try
 					Thread.Sleep(250);
 				}
 				catch (ApplicationException ex)
 				{
-					System.Diagnostics.Debug.WriteLine("=============: " + ex.Message);
+					System.Diagnostics.Debug.WriteLine("Error: " + ex.Message);
 					// wait for a while before the next try
 					Thread.Sleep(250);
 				}
 				catch (Exception ex)
 				{
-					System.Diagnostics.Debug.WriteLine("=============: " + ex.Message);
+					System.Diagnostics.Debug.WriteLine("Error: " + ex.Message);
 				}
 				finally
 				{
