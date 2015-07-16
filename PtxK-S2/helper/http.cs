@@ -43,7 +43,7 @@ namespace PtxK_S2
                 byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(PostContent);
                 WebReq.ContentLength = byteArray.Length;
                 WebReq.ContentType = "text/xml";
-                WebReq.Timeout = 3000;
+                WebReq.Timeout = 5000;
                 WebReq.ConnectionGroupName = "HttpSend "+strUrl;
 
                 //Bei POST und PUT Request Content setzen
