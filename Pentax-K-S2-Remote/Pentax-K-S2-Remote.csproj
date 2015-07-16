@@ -218,7 +218,6 @@
     <None Include="Resources\green-button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="history.txt" />
     <Content Include="readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
