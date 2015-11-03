@@ -215,6 +215,7 @@ namespace PtxK_S2
             {
                 // wait for a while before the next try
                 Thread.Sleep(250);
+                System.Diagnostics.Debug.WriteLine("Sleep 250" + ex.Message);
             }
             catch (ApplicationException ex)
             {

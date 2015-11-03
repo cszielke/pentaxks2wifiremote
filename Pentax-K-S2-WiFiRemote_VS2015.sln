@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pentax-K-S2-Remote", "Pentax-K-S2-Remote\Pentax-K-S2-Remote.csproj", "{A10EEE97-7A33-4B33-96CF-37E0F0979CB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PtxK-S2", "PtxK-S2\PtxK-S2.csproj", "{4AE92073-BAC3-45B7-93BD-A6EFAE9E7E55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aga.Controls", "Aga.Controls\Aga.Controls.csproj", "{E73BB233-D88B-44A7-A98F-D71EE158381D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A10EEE97-7A33-4B33-96CF-37E0F0979CB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A10EEE97-7A33-4B33-96CF-37E0F0979CB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A10EEE97-7A33-4B33-96CF-37E0F0979CB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A10EEE97-7A33-4B33-96CF-37E0F0979CB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AE92073-BAC3-45B7-93BD-A6EFAE9E7E55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AE92073-BAC3-45B7-93BD-A6EFAE9E7E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AE92073-BAC3-45B7-93BD-A6EFAE9E7E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AE92073-BAC3-45B7-93BD-A6EFAE9E7E55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E73BB233-D88B-44A7-A98F-D71EE158381D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E73BB233-D88B-44A7-A98F-D71EE158381D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E73BB233-D88B-44A7-A98F-D71EE158381D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E73BB233-D88B-44A7-A98F-D71EE158381D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

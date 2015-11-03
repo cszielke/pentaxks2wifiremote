@@ -456,7 +456,7 @@ namespace PtxK_S2
             if (param.exposureModeOption != null) Parameter.exposureModeOption = param.exposureModeOption;
             if (param.filter != null) Parameter.filter = param.filter;
             if (param.focusCenters != null) Parameter.focusCenters = param.focusCenters;
-            if (param.focused != null) Parameter.focused = param.focused;
+            Parameter.focused = param.focused;
             if (param.focusMode != null) Parameter.focusMode = param.focusMode;
             if (param.liveState != null) Parameter.liveState = param.liveState;
             if (param.movieSize != null) Parameter.movieSize = param.movieSize;
@@ -473,8 +473,8 @@ namespace PtxK_S2
             if (param.firmwareVersion != null) Parameter.firmwareVersion = param.firmwareVersion;
             if (param.macAddress != null) Parameter.macAddress = param.macAddress;
             if (param.model != null) Parameter.model = param.model;
-            if (param.hot != null) Parameter.hot = param.hot;
-            if (param.battery != null) Parameter.battery = param.battery;
+            Parameter.hot = param.hot;
+            Parameter.battery = param.battery;
 
             //WLAN
             if (param.channel != null) Parameter.channel = param.channel;
